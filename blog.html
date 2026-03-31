@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Blog - GreenVibe | Plant Care Tips & Guides</title>
+    <style>
+        :root {
+            --primary-green: #2d5f3f;
+            --light-green: #4a8c5e;
+            --accent-green: #8bc34a;
+            --dark-bg: #1a2f23;
+            --cream: #f5f5dc;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --red-heart: #ff4757;
+            --card-shadow: 0 4px 15px rgba(45, 95, 63, 0.1);
+            --hover-shadow: 0 8px 25px rgba(45, 95, 63, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: var(--shadow) 0 2px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .announcement-bar {
+            background: var(--primary-green);
+            color: var(--white);
+            text-align: center;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-menu a.active {
+            color: var(--primary-green);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-green);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            position: relative;
+            text-decoration: none;
+            font-size: 20px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .nav-icons a:hover {
+            color: var(--primary-green);
+        }
+
+        .cart-count, .wishlist-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--red-heart);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 120px;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--cream) 0%, #e8f5e8 100%);
+            margin-bottom: 4rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '📖';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            font-size: 60px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '🌿';
+            position: absolute;
+            bottom: 30px;
+            right: 60px;
+            font-size: 50px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite reverse;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: slideInFromBottom 1s ease-out 0.3s both;
+        }
+
+        /* Blog Categories */
+        .blog-categories {
+            margin-bottom: 4rem;
+        }
+
+        .categories-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            background: var(--white);
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .category-tab.active,
+        .category-tab:hover {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* Featured Posts */
+        .featured-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .featured-post {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+            animation: slideInFromLeft 0.8s ease-out;
+        }
+
+        .featured-post:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .featured-post-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .featured-post-image {
+            background: linear-gradient(45deg, var(--primary-green), var(--light-green));
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .featured-post-text {
+            padding: 2rem;
+        }
+
+        .featured-post-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .featured-post-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .read-more-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .read-more-btn:hover {
+            background: var(--light-green);
+            transform: scale(1.05);
+        }
+
+        /* Blog Posts Grid */
+        .blog-posts {
+            margin-bottom: 4rem;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-post-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            animation: slideInFromBottom 0.8s ease-out;
+            cursor: pointer;
+        }
+
+        .blog-post-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .post-image {
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-green));
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .post-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--white);
+            color: var(--primary-green);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-content h4 {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content p {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .post-likes {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .post-likes:hover {
+            color: var(--red-heart);
+        }
+
+        .post-likes.liked {
+            color: var(--red-heart);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background: var(--accent-green);
+            color: var(--primary-green);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Popular Tags */
+        .tags-section {
+            margin-bottom: 4rem;
+        }
+
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .tag {
+            background: var(--cream);
+            color: var(--primary-green);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .tag:hover {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-result-item:hover {
+            background: var(--cream);
+        }
+
+        /* Article Modal */
+        .article-modal .modal-content {
+            max-width: 800px;
+            max-height: 90vh;
+        }
+
+        .article-content {
+            line-height: 1.8;
+        }
+
+        .article-content h3 {
+            color: var(--primary-green);
+            margin: 2rem 0 1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary-green), var(--light-green));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .featured-post-content {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10001;
+            animation: slideInFromRight 0.3s ease-out;
+            display: none;
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* MODAL BASE */
+.search-modal,
+.account-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-modal.active,
+.account-modal.active {
+  display: flex;
+}
+
+/* CONTENT */
+.search-modal-content,
+.account-modal-content {
+  background: #fff;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  padding: 30px;
+}
+
+/* HEADER */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-header button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* SEARCH */
+.search-modal-input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #2d5f3f;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.search-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2d5f3f;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.search-results {
+  margin-top: 15px;
+}
+
+/* ACCOUNT */
+.account-btn {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  border: none;
+  background: #2d5f3f;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.account-btn.secondary {
+  background: white;
+  color: #2d5f3f;
+  border: 2px solid #2d5f3f;
+}
+
+.account-links a {
+  display: block;
+  padding: 8px;
+  color: #2d5f3f;
+  text-decoration: none;
+}
+ /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 60px 30px 30px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .social-icon:hover {
+            background: var(--accent-green);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="announcement-bar">
+            🎉 Special Offer: Get 20% OFF on orders above ₹1499 | Use Code: GREEN20
+        </div>
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                GreenVibe
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="plantcare.html">Plant Care</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="#" onclick="openSearchModal()">🔍</a>
+                <a href="#" onclick="openAccountModal()">👤</a>
+                <a href="wishlist.html">❤️</span></a>
+                <a href="cart.html">🛒</span></a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1>🌿 Plant Care Blog</h1>
+                <p>Discover expert tips, seasonal guides, and plant care secrets from our passionate community of plant lovers!</p>
+            </section>
+
+            <!-- Blog Categories -->
+            <section class="blog-categories">
+                <div class="categories-tabs">
+                    <div class="category-tab active" onclick="filterPosts('all')">All Posts</div>
+                    <div class="category-tab" onclick="filterPosts('care')">Plant Care</div>
+                    <div class="category-tab" onclick="filterPosts('seasonal')">Seasonal Tips</div>
+                    <div class="category-tab" onclick="filterPosts('indoor')">Indoor Plants</div>
+                    <div class="category-tab" onclick="filterPosts('outdoor')">Outdoor Garden</div>
+                    <div class="category-tab" onclick="filterPosts('problems')">Plant Problems</div>
+                </div>
+            </section>
+
+            <!-- Featured Post -->
+            <section class="featured-section">
+                <div class="section-header">
+                    <h2>Featured Article</h2>
+                    <p>Our top pick for this week's must-read plant content</p>
+                </div>
+                <article class="featured-post" onclick="openArticle('featured')">
+                    <div class="featured-post-content">
+                        <div class="featured-post-image">🌱</div>
+                        <div class="featured-post-text">
+                            <div class="post-meta">
+                                <span>📅 Nov 3, 2025</span>
+                                <span>👤 Sarah Green</span>
+                                <span>⏱️ 8 min read</span>
+                            </div>
+                            <h3>The Complete Guide to Winter Plant Care</h3>
+                            <p>As temperatures drop and daylight hours decrease, your plants need special attention to thrive through the winter months. Learn essential techniques for maintaining healthy plants during the colder season, from adjusting watering schedules to providing adequate light.</p>
+                            <a href="#" class="read-more-btn" onclick="event.stopPropagation(); openArticle('featured');">Read Full Article</a>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Blog Posts Grid -->
+            <section class="blog-posts">
+                <div class="section-header">
+                    <h2>Latest Articles</h2>
+                    <p>Stay updated with the newest plant care tips and gardening insights</p>
+                </div>
+                <div class="posts-grid" id="postsGrid">
+                    <article class="blog-post-card" data-category="care" onclick="openArticle('monstera')">
+                        <div class="post-image">
+                            🌿
+                            <div class="post-category">Plant Care</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>5 Signs Your Monstera Needs Repotting</h4>
+                            <p>Learn to recognize when your beloved Monstera has outgrown its current home and needs a larger space to continue thriving.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Nov 1, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>24</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post-card" data-category="seasonal" onclick="openArticle('winter')">
+                        <div class="post-image">
+                            ❄️
+                            <div class="post-category">Seasonal</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Preparing Your Garden for Winter</h4>
+                            <p>Essential steps to protect your outdoor plants from frost and ensure they emerge healthy in spring.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Oct 30, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>18</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post-card" data-category="indoor" onclick="openArticle('lowlight')">
+                        <div class="post-image">
+                            🏠
+                            <div class="post-category">Indoor Plants</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Best Low-Light Plants for Your Home</h4>
+                            <p>Discover beautiful plants that thrive in darker corners and dimly lit rooms of your home.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Oct 28, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>32</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post-card" data-category="problems" onclick="openArticle('yellowing')">
+                        <div class="post-image">
+                            🟡
+                            <div class="post-category">Plant Problems</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Why Are My Plant Leaves Turning Yellow?</h4>
+                            <p>Identify the causes of yellowing leaves and learn effective solutions to restore your plant's health.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Oct 25, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>45</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post-card" data-category="outdoor" onclick="openArticle('composting')">
+                        <div class="post-image">
+                            🌱
+                            <div class="post-category">Outdoor Garden</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>DIY Composting for Healthier Soil</h4>
+                            <p>Create nutrient-rich compost at home to give your garden plants the best possible growing medium.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Oct 22, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>28</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post-card" data-category="care" onclick="openArticle('watering')">
+                        <div class="post-image">
+                            💧
+                            <div class="post-category">Plant Care</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Mastering the Art of Plant Watering</h4>
+                            <p>Learn the perfect watering techniques for different plant types and avoid common watering mistakes.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Oct 20, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>38</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post-card" data-category="indoor" onclick="openArticle('propagation')">
+                        <div class="post-image">
+                            🌿
+                            <div class="post-category">Indoor Plants</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Plant Propagation for Beginners</h4>
+                            <p>Step-by-step guide to multiplying your favorite houseplants through cuttings and division.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Oct 18, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>41</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post-card" data-category="problems" onclick="openArticle('pests')">
+                        <div class="post-image">
+                            🐛
+                            <div class="post-category">Plant Problems</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Natural Pest Control Methods</h4>
+                            <p>Eco-friendly solutions to common plant pests that won't harm your plants or the environment.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Oct 15, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>33</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-post-card" data-category="seasonal" onclick="openArticle('spring')">
+                        <div class="post-image">
+                            🌸
+                            <div class="post-category">Seasonal</div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Spring Plant Care Checklist</h4>
+                            <p>Essential tasks to prepare your plants for the growing season and ensure vibrant spring growth.</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>📅 Oct 12, 2025</span>
+                            <div class="post-likes" onclick="event.stopPropagation(); toggleLike(this)">
+                                ❤️ <span>29</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section class="newsletter-section">
+                <h2>🌿 Join Our Plant Community</h2>
+                <p>Get weekly plant care tips, seasonal guides, and exclusive content delivered to your inbox</p>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </section>
+
+            <!-- Popular Tags -->
+            <section class="tags-section">
+                <div class="section-header">
+                    <h2>Popular Topics</h2>
+                    <p>Explore articles by topic</p>
+                </div>
+                <div class="tags-cloud">
+                    <span class="tag" onclick="filterByTag('houseplants')">#Houseplants</span>
+                    <span class="tag" onclick="filterByTag('watering')">#Watering</span>
+                    <span class="tag" onclick="filterByTag('succulents')">#Succulents</span>
+                    <span class="tag" onclick="filterByTag('propagation')">#Propagation</span>
+                    <span class="tag" onclick="filterByTag('pests')">#Pests</span>
+                    <span class="tag" onclick="filterByTag('fertilizer')">#Fertilizer</span>
+                    <span class="tag" onclick="filterByTag('repotting')">#Repotting</span>
+                    <span class="tag" onclick="filterByTag('seasonal')">#Seasonal</span>
+                    <span class="tag" onclick="filterByTag('beginners')">#Beginners</span>
+                    <span class="tag" onclick="filterByTag('indoor')">#Indoor</span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GreenVibe</h3>
+                <p>Your trusted partner in creating beautiful, thriving plant spaces. Quality plants, expert care, and passionate service.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" style="margin-right: 1rem;">📘 Facebook</a>
+                    <a href="#" style="margin-right: 1rem;">📷 Instagram</a>
+                    <a href="#" style="margin-right: 1rem;">🐦 Twitter</a>
+                </div>
+            </div>
+            <div class="footer-section">
+    <h3>Quick Links</h3>
+    <ul>
+        <li><a href="shop.html">Shop Plants</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="plantcare.html">Plant Care Guide</a></li>
+        <li><a href="blog.html">Blog & Tips</a></li>
+        <li><a href="dashboard.html" onclick="localStorage.setItem('openSection','orders')">
+Track Order
+</a></li>
+    </ul>
+</div>
+
+<div class="footer-section">
+    <h3>Customer Service</h3>
+    <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html#faq">FAQ</a></li>
+        <li>
+  <a href="dashboard.html" onclick="localStorage.setItem('openSection','shipping')">
+    🚚 Shipping Info
+  </a>
+</li>
+
+<li>
+  <a href="dashboard.html" onclick="localStorage.setItem('openSection','returns')">
+    🔁 Returns & Refunds
+  </a>
+</li>
+    </ul>
+</div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 123 Garden Street, Plant City, PC 12345</p>
+                <p>📞 +91 9876543210</p>
+                <p>📧 info@greenvibe.com</p>
+                <p>🕒 Mon-Sat: 9AM-7PM, Sun: 10AM-6PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 GreenVibe. All rights reserved. | <a href="privacy policy.html">Privacy Policy</a> | <a href="terms and conditions.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    !-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: var(--primary-green); margin: 0;">🔍 Search Plants</h2>
+                <button onclick="closeSearchModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <input type="text" class="search-modal-input" id="modalSearchInput" placeholder="Search for plants, succulents, flowers..." onkeypress="if(event.key==='Enter') modalSearch()">
+            <button onclick="modalSearch()" style="width: 100%; padding: 15px; background: var(--primary-green); color: white; border: none; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                Search
+            </button>
+            <div id="quickSearchResults" style="margin-top: 20px; max-height: 300px; overflow-y: auto; scrollbar-width: none;">
+                <!-- Quick search results will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="account-modal" id="accountModal">
+        <div class="account-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 style="color: var(--primary-green); margin: 0;">👤 My Account</h2>
+                <button onclick="closeAccountModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <button class="account-btn" onclick="window.location.href='login.html'">🔐 Login</button>
+            <button class="account-btn secondary" onclick="window.location.href='register.html'">📝 Register</button>
+            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Quick Access</p>
+                <a href="dashboard.html" class="menu-link" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">📊 My Dashboard</a>
+                <a href="dashboard.html" class="menu-link"
+   onclick="localStorage.setItem('openSection','orders')" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">📦 My Orders</a>
+                <a href="wishlist.html" class="menu-link" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">❤️ My Wishlist</a>
+                <a href="dashboard.html" class="menu-link"
+   onclick="localStorage.setItem('openSection','profile')"
+   style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none;">
+   ⚙️ Settings
+</a>
+        </div>
+        </div>
+    </div>
+
+
+    <!-- Article Modal -->
+    <div id="articleModal" class="modal article-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="articleTitle">Article Title</h3>
+                <button class="close-modal" onclick="closeArticleModal()">&times;</button>
+            </div>
+            <div class="article-content" id="articleContent">
+                <!-- Article content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        let currentFilter = 'all';
+
+        // Blog post filtering
+        function filterPosts(category) {
+            currentFilter = category;
+            const posts = document.querySelectorAll('.blog-post-card');
+            const tabs = document.querySelectorAll('.category-tab');
+            
+            // Update active tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter posts
+            posts.forEach(post => {
+                if (category === 'all' || post.dataset.category === category) {
+                    post.style.display = 'block';
+                    post.style.animation = 'slideInFromBottom 0.5s ease-out';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+            
+            showToast(`Showing ${category === 'all' ? 'all' : category} articles`);
+        }
+
+        // Filter by tag
+        function filterByTag(tag) {
+            showToast(`Searching for #${tag} articles...`);
+            // In a real application, this would filter posts by tag
+        }
+
+        // Like functionality
+        function toggleLike(element) {
+            const likeCount = element.querySelector('span');
+            const currentCount = parseInt(likeCount.textContent);
+            
+            if (element.classList.contains('liked')) {
+                element.classList.remove('liked');
+                likeCount.textContent = currentCount - 1;
+                showToast('Removed from favorites');
+            } else {
+                element.classList.add('liked');
+                likeCount.textContent = currentCount + 1;
+                showToast('Added to favorites ❤️');
+            }
+        }
+
+        // Open article modal
+        function openArticle(articleId) {
+            const modal = document.getElementById('articleModal');
+            const title = document.getElementById('articleTitle');
+            const content = document.getElementById('articleContent');
+            
+            // Article content data
+            const articles = {
+                featured: {
+                    title: 'The Complete Guide to Winter Plant Care',
+                    content: `
+                        <div class="article-image">❄️</div>
+                        <p>As winter approaches, your plants face unique challenges that require thoughtful adjustments to your care routine. Understanding these seasonal needs is crucial for maintaining healthy, thriving plants through the colder months.</p>
+                        
+                        <h3>🌡️ Temperature Management</h3>
+                        <p>Winter temperatures can stress plants, especially those near windows or heating sources. Keep plants away from drafts, radiators, and heating vents. Most houseplants prefer temperatures between 65-75°F (18-24°C) during the day and slightly cooler at night.</p>
+                        
+                        <h3>💧 Adjusting Watering Schedule</h3>
+                        <p>Plants use less water in winter due to slower growth and lower light levels. Check soil moisture more frequently, but water less often. The top inch of soil should be dry before watering most plants. Overwatering in winter is more harmful than underwatering.</p>
+                        
+                        <h3>☀️ Light Requirements</h3>
+                        <p>With shorter days and weaker sunlight, consider moving plants closer to windows or supplementing with grow lights. South-facing windows provide the most light in winter. Clean windows and plant leaves regularly to maximize light absorption.</p>
+                        
+                        <h3>💨 Humidity Control</h3>
+                        <p>Indoor heating systems reduce humidity, which can stress tropical plants. Use humidifiers, pebble trays, or group plants together to maintain 40-50% humidity. Misting is less effective and can promote fungal issues in cooler temperatures.</p>
+                        
+                        <h3>🌱 Fertilizing and Growth</h3>
+                        <p>Most plants enter a dormant phase in winter, requiring little to no fertilizer. Stop feeding most plants from October through February. Resume light feeding in spring when you notice new growth beginning.</p>
+                    `
+                },
+                monstera: {
+                    title: '5 Signs Your Monstera Needs Repotting',
+                    content: `
+                        <div class="article-image">🌿</div>
+                        <p>Monsteras are beloved for their dramatic split leaves and vigorous growth, but knowing when to repot can be tricky. Here are the key signs to watch for.</p>
+                        
+                        <h3>1. Roots Growing Through Drainage Holes</h3>
+                        <p>The most obvious sign is roots emerging from the bottom of the pot. This indicates your Monstera has outgrown its current container and needs more space.</p>
+                        
+                        <h3>2. Water Runs Straight Through</h3>
+                        <p>If water flows immediately out the drainage holes without being absorbed, the root system has likely filled most of the pot, leaving little room for soil.</p>
+                        
+                        <h3>3. Stunted or Slow Growth</h3>
+                        <p>A previously fast-growing Monstera that suddenly stops producing new leaves or grows very slowly may be pot-bound and need fresh soil and space.</p>
+                        
+                        <h3>4. Soil Dries Out Quickly</h3>
+                        <p>If you find yourself watering much more frequently than before, the extensive root system may be using all available moisture rapidly.</p>
+                        
+                        <h3>5. Top-Heavy Plant</h3>
+                        <p>When your Monstera becomes unstable or tips over easily, it may have outgrown its pot. A larger, heavier container will provide better stability.</p>
+                    `
+                },
+                // Add more articles as needed
+                winter: {
+                    title: 'Preparing Your Garden for Winter',
+                    content: `
+                        <div class="article-image">❄️</div>
+                        <p>Proper winter preparation protects your garden investment and ensures a beautiful spring emergence.</p>
+                        <h3>🍂 Clean Up and Mulch</h3>
+                        <p>Remove fallen leaves, dead plant material, and apply fresh mulch around perennials and shrubs to insulate roots.</p>
+                        <h3>💧 Final Watering</h3>
+                        <p>Give trees and shrubs a deep watering before the ground freezes, especially evergreens that continue losing moisture in winter.</p>
+                    `
+                }
+            };
+            
+            const article = articles[articleId] || articles.featured;
+            title.textContent = article.title;
+            content.innerHTML = article.content;
+            modal.style.display = 'block';
+        }
+
+        function closeArticleModal() {
+            document.getElementById('articleModal').style.display = 'none';
+        }
+
+        // Newsletter subscription
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value;
+            showToast(`Thanks for subscribing! Welcome to the GreenVibe community! 🌿`);
+            event.target.reset();
+        }
+
+        // Search Modal Functions
+        function openSearchModal() {
+            document.getElementById('searchModal').classList.add('active');
+            document.getElementById('modalSearchInput').focus();
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.remove('active');
+        }
+
+        function modalSearch() {
+            const searchTerm = document.getElementById('modalSearchInput').value.toLowerCase();
+            const resultsDiv = document.getElementById('quickSearchResults');
+            
+            if (!searchTerm) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">Type to search...</p>';
+                return;
+            }
+            
+            const dummyPlants = [
+  { name: "Monstera", category: "Indoor", price: 499 },
+  { name: "Snake Plant", category: "Indoor", price: 299 },
+  { name: "Aloe Vera", category: "Succulent", price: 199 }
+];
+
+const results = dummyPlants.filter(p =>
+  p.name.toLowerCase().includes(searchTerm)
+);
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">No plants found</p>';
+            } else {
+                resultsDiv.innerHTML = results.map(p => `
+                    <div onclick="quickView(${p.id}); closeSearchModal();" style="padding: 15px; margin-bottom: 10px; background: #f8f9fa; border-radius: 10px; cursor: pointer; display: flex; gap: 15px; align-items: center; transition: all 0.3s ease;" onmouseover="this.style.background='#e8f5e9'" onmouseout="this.style.background='#f8f9fa'">
+                        <div style="font-size: 40px;">${p.image.includes('svg') ? p.name.charAt(0) : '🌿'}</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--primary-green); margin-bottom: 3px;">${p.name}</div>
+                            <div style="font-size: 12px; color: #666;">${p.category} • ₹${p.price}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Account Modal Functions
+        function openAccountModal() {
+            document.getElementById('accountModal').classList.add('active');
+        }
+
+        function closeAccountModal() {
+            document.getElementById('accountModal').classList.remove('active');
+        }
+
+        // Close modals on outside click
+        document.getElementById('searchModal').addEventListener('click', (e) => {
+            if (e.target.id === 'searchModal') {
+                closeSearchModal();
+            }
+        });
+
+        document.getElementById('accountModal').addEventListener('click', (e) => {
+            if (e.target.id === 'accountModal') {
+                closeAccountModal();
+            }
+        });
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const searchModal = document.getElementById('searchModal');
+            const accountModal = document.getElementById('accountModal');
+            const articleModal = document.getElementById('articleModal');
+            
+            if (event.target === searchModal) {
+                closeSearchModal();
+            }
+            if (event.target === accountModal) {
+                closeAccountModal();
+            }
+            if (event.target === articleModal) {
+                closeArticleModal();
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add staggered animation delays to blog posts
+            const posts = document.querySelectorAll('.blog-post-card');
+            posts.forEach((post, index) => {
+                post.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Update cart and wishlist counts from localStorage if available
+            const cartCount = localStorage.getItem('cartCount') || 0;
+            const wishlistCount = localStorage.getItem('wishlistCount') || 0;
+            
+            document.querySelector('.cart-count').textContent = cartCount;
+            document.querySelector('.wishlist-count').textContent = wishlistCount;
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Care Guide - GreenVibe | Expert Plant Care Tips</title>
+    <style>
+        :root {
+            --primary-green: #2d5f3f;
+            --light-green: #4a8c5e;
+            --accent-green: #8bc34a;
+            --dark-bg: #1a2f23;
+            --cream: #f5f5dc;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --red-heart: #ff4757;
+            --card-shadow: 0 4px 15px rgba(45, 95, 63, 0.1);
+            --hover-shadow: 0 8px 25px rgba(45, 95, 63, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px var(--shadow);
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 35px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-green);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-dark);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+            color: var(--primary-green);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-green);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        /* Main Content */
+        .main-content {
+            margin-top: 120px;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--cream) 0%, #e8f5e8 100%);
+            margin-bottom: 4rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '🌿';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            font-size: 60px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '🌱';
+            position: absolute;
+            bottom: 30px;
+            right: 60px;
+            font-size: 50px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite reverse;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: slideInFromBottom 1s ease-out 0.3s both;
+        }
+
+        /* Care Categories */
+        .care-categories {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            animation: slideInFromBottom 0.8s ease-out;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--accent-green);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .category-card p {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .category-card .btn {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .category-card .btn:hover {
+            background: var(--light-green);
+            transform: scale(1.05);
+        }
+
+        /* Care Tips Tabs */
+        .care-tips-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 4rem;
+        }
+
+        .tabs-header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-green);
+            background: var(--cream);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-green);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .tip-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 4rem;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--cream);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-dark);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Plant Care Calculator */
+        .calculator-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .calculator-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group select,
+        .form-group input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .calculate-btn {
+            background: var(--accent-green);
+            color: var(--primary-green);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .calculate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .calculator-result {
+            margin-top: 2rem;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: none;
+        }
+
+/* Search Modal */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            padding: 30px;
+        }
+
+        .search-modal-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--primary-green);
+            border-radius: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Account Modal */
+        .account-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-modal.active {
+            display: flex;
+        }
+
+        .account-modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            padding: 40px;
+        }
+
+        .account-btn {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .account-btn:hover {
+            background: var(--light-green);
+            transform: translateY(-2px);
+        }
+
+        .account-btn.secondary {
+            background: var(--white);
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-result-item:hover {
+            background: var(--cream);
+        }
+
+        /* Animations */
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 200px;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs-header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .calculator-form {
+                grid-template-columns: 1fr;
+            }
+        }
+         /* Quick View Modal */
+        .quick-view-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-view-modal.active {
+            display: flex;
+        }
+
+        .quick-view-content {
+            background: var(--white);
+            border-radius: 25px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .quick-view-content::-webkit-scrollbar {
+            width: 0;
+            display: none;
+        }
+
+        .quick-view-content {
+            scrollbar-width: none;
+        }
+
+        .quick-view-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .quick-view-body {
+            padding: 30px;
+        }
+
+        .quick-view-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .quick-view-image {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 20px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        .quick-view-details h2 {
+            font-size: 28px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .quick-view-price {
+            font-size: 32px;
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .quick-view-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quick-view-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .quick-view-features {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .quick-view-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10001;
+            animation: slideInFromRight 0.3s ease-out;
+            display: none;
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+ /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 60px 30px 30px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .social-icon:hover {
+            background: var(--accent-green);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+    </style>
+</head>
+<body>
+     <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            🎉 Special Offer: Get 20% OFF on orders above ₹1499 | Use Code: GREEN20
+        </div>
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                GreenVibe
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="categories.html" >Categories</a>
+                <a href="plantcare.html" class="active">Plant Care</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="nav-icons">
+                <button class="icon-btn" onclick="openSearchModal()" aria-label="Search">🔍</button>
+                <button class="icon-btn" onclick="openAccountModal()" aria-label="Account">👤</button>
+                <a href="wishlist.html" class="icon-btn" id="wishlistBtn" aria-label="Wishlist" style="text-decoration: none; color: inherit;">
+                    ❤️
+                    </span>
+                </a>
+                <a href="cart.html" class="icon-btn" id="cartBtn" aria-label="Cart" style="text-decoration: none; color: inherit;">
+                    🛒
+                    </span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1>🌿 Plant Care Made Simple</h1>
+                <p>Expert tips, guides, and tools to help your plants thrive. From beginners to green thumbs, we've got you covered!</p>
+            </section>
+
+            <!-- Care Categories -->
+            <section class="care-categories">
+                <div class="section-header">
+                    <h2>Plant Care Categories</h2>
+                    <p>Discover specialized care guides for different types of plants</p>
+                </div>
+                <div class="categories-grid">                <div class="category-card">
+                    <span class="category-icon">💧</span>
+                    <h3>Watering Guide</h3>
+                    <p>Learn the perfect watering schedule and techniques for different plant types</p>
+                    <a href="#" class="btn" onclick="event.preventDefault(); showCareTab('watering');">Learn More</a>
+                </div>
+                <div class="category-card">
+                    <span class="category-icon">☀️</span>
+                    <h3>Light Requirements</h3>
+                    <p>Understand how much sunlight your plants need to flourish</p>
+                    <a href="#" class="btn" onclick="event.preventDefault(); showCareTab('light');">Learn More</a>
+                </div>
+                <div class="category-card">
+                    <span class="category-icon">🌱</span>
+                    <h3>Soil & Fertilizer</h3>
+                    <p>Choose the right soil mix and feeding schedule for healthy growth</p>
+                    <a href="#" class="btn" onclick="event.preventDefault(); showCareTab('soil');">Learn More</a>
+                </div>
+                <div class="category-card">
+                    <span class="category-icon">🐛</span>
+                    <h3>Problem Solving</h3>
+                    <p>Identify and fix common plant problems, pests, and diseases</p>
+                    <a href="#" class="btn" onclick="event.preventDefault(); showCareTab('problems');">Learn More</a>
+                </div>
+                <div class="category-card">
+                    <span class="category-icon">🍂</span>
+                    <h3>Seasonal Care</h3>
+                    <p>Adapt your plant care routine to changing seasons</p>
+                    <a href="#" class="btn" onclick="event.preventDefault(); showCareTab('seasonal');">Learn More</a>
+                </div>
+                <div class="category-card">
+                    <span class="category-icon">🌿</span>
+                    <h3>Propagation</h3>
+                    <p>Learn how to grow new plants from cuttings and seeds</p>
+                    <a href="#" class="btn" onclick="event.preventDefault(); showCareTab('propagation');">Learn More</a>
+                </div>
+                </div>
+            </section>
+
+            <!-- Care Tips Tabs -->
+            <section class="care-tips-section">
+                <div class="tabs-header">
+                    <button class="tab-btn active" onclick="showTab('watering')">💧 Watering</button>
+                    <button class="tab-btn" onclick="showTab('light')">☀️ Light</button>
+                    <button class="tab-btn" onclick="showTab('soil')">🌱 Soil</button>
+                    <button class="tab-btn" onclick="showTab('problems')">🐛 Problems</button>
+                    <button class="tab-btn" onclick="showTab('seasonal')">🍂 Seasonal</button>
+                    <button class="tab-btn" onclick="showTab('propagation')">🌿 Propagation</button>
+                </div>
+
+                <div id="watering" class="tab-content active">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">💧 Watering Your Plants</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>💧 Check Soil Moisture</h4>
+                            <p>Stick your finger 1-2 inches into the soil. If it's dry, it's time to water. Most houseplants prefer slightly moist soil.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🕐 Best Time to Water</h4>
+                            <p>Water plants in the morning so they can absorb moisture throughout the day and dry before evening.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🚿 Watering Technique</h4>
+                            <p>Water slowly and thoroughly until water drains from the bottom. Avoid getting water on leaves.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>💧 Water Quality</h4>
+                            <p>Use room temperature water. If possible, let tap water sit overnight to allow chlorine to evaporate.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="light" class="tab-content">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">☀️ Light Requirements</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>🌞 Bright Direct Light</h4>
+                            <p>Plants that need 6+ hours of direct sunlight. Place near south-facing windows. Examples: Succulents, Cacti.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🌤️ Bright Indirect Light</h4>
+                            <p>Bright light without direct sun rays. Perfect for most houseplants. Examples: Pothos, Snake Plants.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🌫️ Medium Light</h4>
+                            <p>Areas with some natural light but not too bright. Examples: Peace Lily, ZZ Plant.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🌑 Low Light</h4>
+                            <p>Areas with minimal natural light. Few plants thrive here. Examples: Cast Iron Plant, Chinese Evergreen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="soil" class="tab-content">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">🌱 Soil & Fertilizer</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>🏡 Potting Mix</h4>
+                            <p>Use well-draining potting soil. Never use garden soil for containers as it's too heavy and doesn't drain well.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🌵 Specialized Soils</h4>
+                            <p>Succulents need cactus mix, orchids need orchid bark mix. Match the soil to your plant's needs.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🍽️ Fertilizing Schedule</h4>
+                            <p>Feed most houseplants monthly during spring/summer with diluted liquid fertilizer. Reduce in fall/winter.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🔄 Repotting</h4>
+                            <p>Repot when roots are coming out of drainage holes or soil stays wet too long. Usually every 1-2 years.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="problems" class="tab-content">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">🐛 Common Problems</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>🟡 Yellow Leaves</h4>
+                            <p>Usually overwatering or natural aging. Check soil moisture and adjust watering schedule.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🟤 Brown Leaf Tips</h4>
+                            <p>Low humidity, fluoride in water, or over-fertilizing. Increase humidity and use filtered water.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🐛 Pests</h4>
+                            <p>Common pests: spider mites, aphids, mealybugs. Use insecticidal soap or neem oil treatment.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🍄 Fungal Issues</h4>
+                            <p>Often from overwatering. Improve air circulation, reduce watering, remove affected parts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="seasonal" class="tab-content">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">🍂 Seasonal Care</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>🌸 Spring Care</h4>
+                            <p>Increase watering and feeding. Perfect time for repotting and propagating as plants start active growth.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>☀️ Summer Care</h4>
+                            <p>Water more frequently, provide shade from intense sun, watch for pests, and ensure good air circulation.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🍂 Fall Care</h4>
+                            <p>Gradually reduce watering and stop fertilizing. Bring outdoor plants inside before temperature drops.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>❄️ Winter Care</h4>
+                            <p>Water less frequently, increase humidity, provide extra light, and avoid cold drafts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="propagation" class="tab-content">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">🌿 Plant Propagation</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>✂️ Stem Cuttings</h4>
+                            <p>Cut 4-6 inch stems below a node. Root in water or soil. Works for pothos, philodendrons, and many herbs.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🍃 Leaf Cuttings</h4>
+                            <p>Carefully remove whole leaves and place on soil. Perfect for succulents like jade plants and echeveria.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🌱 Division</h4>
+                            <p>Separate root systems of mature plants. Works well for snake plants, peace lilies, and spider plants.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🌰 Seeds</h4>
+                            <p>Start seeds in seed-starting mix, provide warmth and consistent moisture. Be patient - germination takes time.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Plant Care Calculator -->
+            <section class="calculator-section">
+                <h2>🧮 Plant Care Calculator</h2>
+                <p>Get personalized care recommendations for your plants</p>
+                <form class="calculator-form" onsubmit="calculateCare(event)">
+                    <div class="form-group">
+                        <label for="plant-type">Plant Type:</label>
+                        <select id="plant-type" required>
+                            <option value="">Select plant type</option>
+                            <option value="succulent">Succulent</option>
+                            <option value="tropical">Tropical Plant</option>
+                            <option value="flowering">Flowering Plant</option>
+                            <option value="herb">Herb</option>
+                            <option value="fern">Fern</option>
+                            <option value="cactus">Cactus</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pot-size">Pot Size (inches):</label>
+                        <input type="number" id="pot-size" min="2" max="20" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="light-condition">Light Condition:</label>
+                        <select id="light-condition" required>
+                            <option value="">Select light condition</option>
+                            <option value="low">Low Light</option>
+                            <option value="medium">Medium Light</option>
+                            <option value="bright-indirect">Bright Indirect</option>
+                            <option value="bright-direct">Bright Direct</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="season">Current Season:</label>
+                        <select id="season" required>
+                            <option value="">Select season</option>
+                            <option value="spring">Spring</option>
+                            <option value="summer">Summer</option>
+                            <option value="autumn">Autumn</option>
+                            <option value="winter">Winter</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate Care Schedule</button>
+                </form>
+                <div id="calculator-result" class="calculator-result"></div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <div class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Find answers to common plant care questions</p>
+                </div>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            How often should I water my plants?
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The frequency depends on the plant type, pot size, and environmental conditions. Generally, check the soil moisture by inserting your finger 1-2 inches deep. Water when the top inch of soil feels dry for most houseplants.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Why are my plant's leaves turning yellow?
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yellow leaves can indicate overwatering, underwatering, nutrient deficiency, or natural aging. Check soil moisture first, then consider the plant's age and feeding schedule.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            What's the best fertilizer for houseplants?
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>A balanced liquid fertilizer (20-20-20 or 10-10-10) diluted to half strength works well for most houseplants. Feed monthly during spring and summer, and reduce or stop in fall and winter.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            How do I increase humidity for my plants?
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Use a humidifier, place plants on pebble trays filled with water, group plants together, or mist around (not on) the plants. Aim for 40-60% humidity for most tropical plants.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            When should I repot my plants?
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Repot when roots are coming out of drainage holes, soil dries out too quickly, or the plant hasn't grown in a year. Spring is the best time for repotting most plants.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GreenVibe</h3>
+                <p>Your trusted partner in creating beautiful, thriving plant spaces. Quality plants, expert care, and passionate service.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" style="margin-right: 1rem;">📘 Facebook</a>
+                    <a href="#" style="margin-right: 1rem;">📷 Instagram</a>
+                    <a href="#" style="margin-right: 1rem;">🐦 Twitter</a>
+                </div>
+            </div>
+            <div class="footer-section">
+    <h3>Quick Links</h3>
+    <ul>
+        <li><a href="shop.html">Shop Plants</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="plantcare.html">Plant Care Guide</a></li>
+        <li><a href="blog.html">Blog & Tips</a></li>
+        <li><a href="dashboard.html" onclick="localStorage.setItem('openSection','orders')">
+Track Order
+</a></li>
+    </ul>
+</div>
+
+<div class="footer-section">
+    <h3>Customer Service</h3>
+    <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html#faq">FAQ</a></li>
+        <li>
+  <a href="dashboard.html" onclick="localStorage.setItem('openSection','shipping')">
+    🚚 Shipping Info
+  </a>
+</li>
+
+<li>
+  <a href="dashboard.html" onclick="localStorage.setItem('openSection','returns')">
+    🔁 Returns & Refunds
+  </a>
+</li>
+    </ul>
+</div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 123 Garden Street, Plant City, PC 12345</p>
+                <p>📞 +91 9876543210</p>
+                <p>📧 info@greenvibe.com</p>
+                <p>🕒 Mon-Sat: 9AM-7PM, Sun: 10AM-6PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 GreenVibe. All rights reserved. | <a href="privacy policy.html">Privacy Policy</a> | <a href="terms and conditions.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: var(--primary-green); margin: 0;">🔍 Search Plants</h2>
+                <button onclick="closeSearchModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <input type="text" class="search-modal-input" id="modalSearchInput" placeholder="Search categories, plants, features..." onkeypress="if(event.key==='Enter') modalSearch()">
+            <button onclick="modalSearch()" style="width: 100%; padding: 15px; background: var(--primary-green); color: white; border: none; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                Search
+            </button>
+            <div id="quickSearchResults" style="margin-top: 20px; max-height: 300px; overflow-y: auto;">
+                <!-- Quick search results will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-modal" id="quickViewModal">
+        <div class="quick-view-content">
+            <div class="quick-view-header">
+                <h2 style="color: var(--primary-green); margin: 0;">Plant Details</h2>
+                <button onclick="closeQuickView()" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #666;">✕</button>
+            </div>
+            <div class="quick-view-body" id="quickViewBody">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="account-modal" id="accountModal">
+        <div class="account-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 style="color: var(--primary-green); margin: 0;">👤 My Account</h2>
+                <button onclick="closeAccountModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <button class="account-btn" onclick="window.location.href='login.html'">🔐 Login</button>
+            <button class="account-btn secondary" onclick="window.location.href='register.html'">📝 Register</button>
+            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Quick Access</p>
+                <a href="dashboard.html" class="menu-link" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">📊 My Dashboard</a>
+                <a href="dashboard.html" class="menu-link"
+   onclick="localStorage.setItem('openSection','orders')" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">📦 My Orders</a>
+                <a href="wishlist.html" class="menu-link" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">❤️ My Wishlist</a>
+                <a href="dashboard.html" class="menu-link"
+   onclick="localStorage.setItem('openSection','profile')"
+   style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none;">
+   ⚙️ Settings
+</a>
+        </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+       // Tab functionality
+function showTab(tabName) {
+    // Hide all tab contents
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+    
+    // Remove active class from all tab buttons
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // Show selected tab content
+    document.getElementById(tabName).classList.add('active');
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
+}
+ // Show Quick View Modal
+        function showQuickView(plantId) {
+            const plant = popularPlants[plantId];
+            if (!plant) return;
+
+            const modal = document.getElementById('quickViewModal');
+            const body = document.getElementById('quickViewBody');
+
+            body.innerHTML = `
+                <div class="quick-view-grid">
+                    <div class="quick-view-image">${plant.icon}</div>
+                    <div class="quick-view-details">
+                        <h2>${plant.name}</h2>
+                        <div class="quick-view-price">₹${plant.price}</div>
+                        <div class="quick-view-rating">
+                            <span style="color: #ffc107;">⭐</span>
+                            <span style="font-weight: 600;">${plant.rating}</span>
+                            <span style="color: #666;">(${plant.reviews} reviews)</span>
+                        </div>
+                        <p class="quick-view-description">${plant.description}</p>
+                        <div class="quick-view-features">
+                            ${plant.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                        </div>
+                        <div style="padding: 15px; background: rgba(139, 195, 74, 0.1); border-radius: 15px; margin-bottom: 25px;">
+                            <div style="font-weight: 600; color: var(--primary-green); margin-bottom: 5px;">🌱 Care Instructions</div>
+                            <div style="font-size: 14px; color: #666;">${plant.care}</div>
+                        </div>
+                        <div class="quick-view-actions">
+                            <button class="qv-btn qv-btn-primary" onclick="addToCart('${plantId}'); showToast('Added to cart!')">🛒 Add to Cart</button>
+                            <button class="qv-btn qv-btn-secondary" onclick="toggleWishlist('${plantId}'); showToast('Added to wishlist!')">❤️ Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #e0e0e0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="color: var(--primary-green); margin: 0;">Additional Information</h3>
+                        <span style="color: #666; font-size: 14px;">Category: <strong>${plant.category}</strong></span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 24px; margin-bottom: 5px;">📦</div>
+                            <div style="font-weight: 600; margin-bottom: 3px;">Pot Size</div>
+                            <div style="font-size: 14px; color: #666;">6-8 inches</div>
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 24px; margin-bottom: 5px;">📏</div>
+                            <div style="font-weight: 600; margin-bottom: 3px;">Plant Height</div>
+                            <div style="font-size: 14px; color: #666;">12-18 inches</div>
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 24px; margin-bottom: 5px;">🚚</div>
+                            <div style="font-weight: 600; margin-bottom: 3px;">Delivery</div>
+                            <div style="font-size: 14px; color: #666;">3-5 business days</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // Close Quick View Modal
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.remove('active');
+        }
+ // Search Modal Functions
+        function openSearchModal() {
+            document.getElementById('searchModal').classList.add('active');
+            document.getElementById('modalSearchInput').focus();
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.remove('active');
+        }
+
+        function modalSearch() {
+            const searchTerm = document.getElementById('modalSearchInput').value.toLowerCase();
+            const resultsDiv = document.getElementById('quickSearchResults');
+            
+            if (!searchTerm) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">Type to search categories or plants...</p>';
+                return;
+            }
+            
+            // Search through categories
+            const results = [];
+            
+            Object.keys(categoryData).forEach(key => {
+                const category = categoryData[key];
+                if (category.name.toLowerCase().includes(searchTerm) || 
+                    category.description.toLowerCase().includes(searchTerm) ||
+                    category.plants.some(plant => plant.toLowerCase().includes(searchTerm))) {
+                    results.push({
+                        type: 'category',
+                        name: category.name,
+                        description: category.description,
+                        action: () => exploreCategory(key)
+                    });
+                }
+            });
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">No categories found</p>';
+            } else {
+                resultsDiv.innerHTML = results.slice(0, 5).map((result, index) => `
+                        <div style="display: flex; gap: 15px; align-items: center;">
+                            <div style="font-size: 30px;">🗂️</div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; color: var(--primary-green); margin-bottom: 3px;">${result.name}</div>
+                                <div style="font-size: 12px; color: #666;">${result.description}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+
+function showCareTab(tabName) {
+    // Hide all tab contents
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+    
+    // Remove active class from all tab buttons
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // Show selected tab content
+    document.getElementById(tabName).classList.add('active');
+    
+    // Find and activate corresponding button
+    const targetButton = Array.from(buttons).find(btn => 
+        btn.textContent.toLowerCase().includes(tabName)
+    );
+    if (targetButton) {
+        targetButton.classList.add('active');
+    }
+    
+    // Scroll to tabs section smoothly
+    document.querySelector('.care-tips-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// FAQ functionality
+function toggleFAQ(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('span');
+    
+    if (answer.classList.contains('active')) {
+        answer.classList.remove('active');
+        icon.textContent = '+';
+    } else {
+        // Close all other FAQs
+        document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+        document.querySelectorAll('.faq-question span').forEach(s => s.textContent = '+');
+        
+        // Open clicked FAQ
+        answer.classList.add('active');
+        icon.textContent = '−';
+    }
+}
+
+// Plant Care Calculator
+function calculateCare(event) {
+    event.preventDefault();
+    
+    const plantType = document.getElementById('plant-type').value;
+    const potSize = document.getElementById('pot-size').value;
+    const lightCondition = document.getElementById('light-condition').value;
+    const season = document.getElementById('season').value;
+    
+    let wateringFreq, fertilizing, tips;
+    
+    // Calculate based on plant type and conditions
+    switch(plantType) {
+        case 'succulent':
+            wateringFreq = season === 'winter' ? '2-3 weeks' : '1-2 weeks';
+            fertilizing = season === 'winter' ? 'No fertilizer needed' : 'Monthly with cactus fertilizer';
+            tips = 'Ensure excellent drainage, bright light, minimal water in winter';
+            break;
+        case 'tropical':
+            wateringFreq = season === 'winter' ? '7-10 days' : '5-7 days';
+            fertilizing = season === 'winter' ? '2-3 months' : 'Monthly';
+            tips = 'Maintain humidity 50-60%, warm temperature, bright indirect light';
+            break;
+        case 'flowering':
+            wateringFreq = season === 'winter' ? '7-10 days' : '4-6 days';
+            fertilizing = 'Bi-weekly during blooming season';
+            tips = 'Deadhead spent flowers, extra nutrients during blooming';
+            break;
+        default:
+            wateringFreq = '7-10 days';
+            fertilizing = 'Monthly during growing season';
+            tips = 'Monitor soil moisture, adjust care based on season';
+    }
+    
+    // Adjust for pot size
+    if (potSize <= 4) {
+        wateringFreq = wateringFreq.replace(/\d+-?\d*/, (match) => Math.max(1, parseInt(match) - 2));
+    } else if (potSize >= 10) {
+        wateringFreq = wateringFreq.replace(/\d+-?\d*/, (match) => parseInt(match) + 3);
+    }
+    
+    const result = document.getElementById('calculator-result');
+    result.innerHTML = `
+        <h4>🌱 Your Personalized Care Schedule</h4>
+        <p><strong>💧 Watering:</strong> Every ${wateringFreq}</p>
+        <p><strong>🍽️ Fertilizing:</strong> ${fertilizing}</p>
+        <p><strong>💡 Special Tips:</strong> ${tips}</p>
+        <p><strong>📍 Pot Size:</strong> ${potSize}" pot - Perfect size!</p>
+        <p><strong>☀️ Light:</strong> ${lightCondition.replace('-', ' ')}</p>
+    `;
+    result.style.display = 'block';
+    
+    showToast('Care schedule calculated successfully! 🌿');
+}
+
+// ✅ REPLACED SECTION BELOW — New Modal & Search Code
+
+// Search Modal Functions
+function openSearchModal() {
+    document.getElementById('searchModal').classList.add('active');
+    document.getElementById('modalSearchInput').focus();
+}
+
+function closeSearchModal() {
+    document.getElementById('searchModal').classList.remove('active');
+}
+
+function modalSearch() {
+    const searchTerm = document.getElementById('modalSearchInput').value.toLowerCase();
+    const resultsDiv = document.getElementById('quickSearchResults');
+    
+    if (!searchTerm) {
+        resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">Type to search categories or plants...</p>';
+        return;
+    }
+    
+    // Search through categories
+    const results = [];
+    
+    Object.keys(categoryData).forEach(key => {
+        const category = categoryData[key];
+        if (category.name.toLowerCase().includes(searchTerm) || 
+            category.description.toLowerCase().includes(searchTerm) ||
+            category.plants.some(plant => plant.toLowerCase().includes(searchTerm))) {
+            results.push({
+                type: 'category',
+                name: category.name,
+                description: category.description,
+                action: () => exploreCategory(key)
+            });
+        }
+    });
+    
+    if (results.length === 0) {
+        resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">No categories found</p>';
+    } else {
+        resultsDiv.innerHTML = results.slice(0, 5).map((result) => `
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <div style="font-size: 30px;">🗂️</div>
+                <div style="flex: 1;">
+                    <div style="font-weight: 600; color: var(--primary-green); margin-bottom: 3px;">${result.name}</div>
+                    <div style="font-size: 12px; color: #666;">${result.description}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+// Account Modal Functions
+function openAccountModal() {
+    document.getElementById('accountModal').classList.add('active');
+}
+
+function closeAccountModal() {
+    document.getElementById('accountModal').classList.remove('active');
+}
+
+// Close modals on outside click
+document.getElementById('searchModal').addEventListener('click', (e) => {
+    if (e.target.id === 'searchModal') {
+        closeSearchModal();
+    }
+});
+
+document.getElementById('accountModal').addEventListener('click', (e) => {
+    if (e.target.id === 'accountModal') {
+        closeAccountModal();
+    }
+});
+
+document.getElementById('quickViewModal').addEventListener('click', (e) => {
+    if (e.target.id === 'quickViewModal') {
+        closeQuickView();
+    }
+});
+
+// Smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Enhanced category card interactions
+document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// Hero card parallax effect
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.hero-card');
+    
+    parallaxElements.forEach(element => {
+        const speed = 0.1;
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px)`;
+    });
+});
+
+// ✅ Keep existing toast function
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.style.display = 'block';
+    
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 3000);
+}
+
+// Header scroll effect
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+    } else {
+        header.style.background = 'var(--white)';
+        header.style.backdropFilter = 'none';
+    }
+});
+    </script>
+</body>
+</html>

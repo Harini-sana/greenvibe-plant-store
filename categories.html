@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Categories - GreenVibe | Find Your Perfect Plant</title>
+    <style>
+        :root {
+            --primary-green: #2d5f3f;
+            --light-green: #4a8c5e;
+            --accent-green: #8bc34a;
+            --dark-bg: #1a2f23;
+            --cream: #f5f5dc;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --red-heart: #ff4757;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px var(--shadow);
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 35px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-green);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-dark);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+            color: var(--primary-green);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-green);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Main Container */
+        .categories-container {
+            max-width: 1400px;
+            margin: 120px auto 40px;
+            padding: 0 30px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Category Hero Grid */
+        .category-hero {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .hero-card {
+            position: relative;
+            height: 300px;
+            border-radius: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(45, 95, 63, 0.8) 0%, rgba(74, 140, 94, 0.6) 100%);
+            z-index: 2;
+            transition: opacity 0.3s ease;
+        }
+
+        .hero-card:hover::before {
+            opacity: 0.9;
+        }
+
+        .hero-card-content {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            z-index: 3;
+            color: var(--white);
+        }
+
+        .hero-card h3 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .hero-card p {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Categories Grid */
+        .categories-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: var(--primary-green);
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-image {
+            height: 200px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .category-card:hover .category-image::before {
+            animation: shine 0.8s ease-out;
+            opacity: 1;
+        }
+
+        @keyframes shine {
+            from {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            to {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        .category-info {
+            padding: 25px;
+        }
+
+        .category-name {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .category-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .category-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .plant-count {
+            font-size: 13px;
+            color: var(--light-green);
+            font-weight: 600;
+        }
+
+        .difficulty-level {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .difficulty-beginner {
+            background: rgba(76, 175, 80, 0.15);
+            color: #4caf50;
+        }
+
+        .difficulty-intermediate {
+            background: rgba(255, 193, 7, 0.15);
+            color: #ffc107;
+        }
+
+        .difficulty-advanced {
+            background: rgba(244, 67, 54, 0.15);
+            color: #f44336;
+        }
+
+        .category-features {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .feature-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            background: rgba(139, 195, 74, 0.15);
+            color: var(--primary-green);
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .category-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .explore-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .explore-btn:hover {
+            background: var(--light-green);
+            transform: scale(1.05);
+        }
+
+        .price-range {
+            font-size: 14px;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        /* Popular Plants Section */
+        .popular-section {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .popular-plant {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .popular-plant:hover {
+            background: #f8f9fa;
+            transform: translateY(-5px);
+        }
+
+        .popular-plant-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .popular-plant-name {
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .popular-plant-price {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Care Tips Section */
+        .tips-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* Quick View Modal */
+        .quick-view-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-view-modal.active {
+            display: flex;
+        }
+
+        .quick-view-content {
+            background: var(--white);
+            border-radius: 25px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .quick-view-content::-webkit-scrollbar {
+            width: 0;
+            display: none;
+        }
+
+        .quick-view-content {
+            scrollbar-width: none;
+        }
+
+        .quick-view-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .quick-view-body {
+            padding: 30px;
+        }
+
+        .quick-view-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .quick-view-image {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 20px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        .quick-view-details h2 {
+            font-size: 28px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .quick-view-price {
+            font-size: 32px;
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .quick-view-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quick-view-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .quick-view-features {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .quick-view-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .qv-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .qv-btn-primary {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .qv-btn-primary:hover {
+            background: var(--light-green);
+            transform: translateY(-2px);
+        }
+
+        .qv-btn-secondary {
+            background: var(--white);
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .qv-btn-secondary:hover {
+            background: rgba(45, 95, 63, 0.1);
+        }
+
+        /* Search Modal */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            padding: 30px;
+        }
+
+        .search-modal-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--primary-green);
+            border-radius: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Account Modal */
+        .account-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-modal.active {
+            display: flex;
+        }
+
+        .account-modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            padding: 40px;
+        }
+
+        .account-btn {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .account-btn:hover {
+            background: var(--light-green);
+            transform: translateY(-2px);
+        }
+
+        .account-btn.secondary {
+            background: var(--white);
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 50px 30px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-green);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-green);
+            transform: translateY(-3px);
+            padding-left: 0;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .category-hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-card {
+                min-height: 250px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .tips-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .categories-container {
+                padding: 0 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+ /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 60px 30px 30px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .social-icon:hover {
+            background: var(--accent-green);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            🎉 Special Offer: Get 20% OFF on orders above ₹1499 | Use Code: GREEN20
+        </div>
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                GreenVibe
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="categories.html" class="active">Categories</a>
+                <a href="plantcare.html">Plant Care</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="nav-icons">
+                <button class="icon-btn" onclick="openSearchModal()" aria-label="Search">🔍</button>
+                <button class="icon-btn" onclick="openAccountModal()" aria-label="Account">👤</button>
+                <a href="wishlist.html" class="icon-btn" id="wishlistBtn" aria-label="Wishlist" style="text-decoration: none; color: inherit;">
+                    ❤️
+                    </span>
+                </a>
+                <a href="cart.html" class="icon-btn" id="cartBtn" aria-label="Cart" style="text-decoration: none; color: inherit;">
+                    🛒
+                    </span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Categories Container -->
+    <div class="categories-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>🌱 Discover Plant Categories</h1>
+            <p>From lush indoor greenery to vibrant outdoor gardens, find the perfect plants for every space, skill level, and lifestyle</p>
+        </div>
+
+        <!-- Category Hero Section -->
+        <div class="category-hero">
+            <div class="hero-card" onclick="exploreCategory('indoor')">
+                <div class="hero-card-content">
+                    <h3>🏠 Indoor Plants</h3>
+                    <p>Transform your home into a green oasis with our collection of air-purifying and low-maintenance houseplants</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span>🌿</span>
+                            <span>45+ Varieties</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span>⭐</span>
+                            <span>4.8 Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-card" onclick="exploreCategory('outdoor')">
+                <div class="hero-card-content">
+                    <h3>🌳 Outdoor Plants</h3>
+                    <p>Create stunning gardens and landscapes with our hardy outdoor plants, trees, and flowering shrubs</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span>🌺</span>
+                            <span>35+ Varieties</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span>🦋</span>
+                            <span>Butterfly Friendly</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Categories Section -->
+        <div class="categories-section">
+            <h2 class="section-title">🗂️ All Plant Categories</h2>
+            <div class="categories-grid">
+                <!-- Indoor Plants -->
+                <div class="category-card" onclick="exploreCategory('indoor')">
+                    <div class="category-image">🏠</div>
+                    <div class="category-info">
+                        <h3 class="category-name">Indoor Plants</h3>
+                        <p class="category-description">Perfect for homes and offices. These plants thrive in indoor conditions and help purify the air.</p>
+                        <div class="category-meta">
+                            <span class="plant-count">45 Plants Available</span>
+                            <span class="difficulty-level difficulty-beginner">Beginner</span>
+                        </div>
+                        <div class="category-features">
+                            <span class="feature-tag">Air Purifying</span>
+                            <span class="feature-tag">Low Light</span>
+                            <span class="feature-tag">Low Maintenance</span>
+                        </div>
+                        <div class="category-action">
+                            <button class="explore-btn">Explore Collection</button>
+                            <span class="price-range">₹149 - ₹899</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outdoor Plants -->
+                <div class="category-card" onclick="exploreCategory('outdoor')">
+                    <div class="category-image">🌳</div>
+                    <div class="category-info">
+                        <h3 class="category-name">Outdoor Plants</h3>
+                        <p class="category-description">Hardy plants for gardens, balconies, and terraces. Weather-resistant and fast-growing varieties.</p>
+                        <div class="category-meta">
+                            <span class="plant-count">35 Plants Available</span>
+                            <span class="difficulty-level difficulty-intermediate">Intermediate</span>
+                        </div>
+                        <div class="category-features">
+                            <span class="feature-tag">Weather Resistant</span>
+                            <span class="feature-tag">Fast Growing</span>
+                            <span class="feature-tag">Colorful</span>
+                        </div>
+                        <div class="category-action">
+                            <button class="explore-btn">Explore Collection</button>
+                            <span class="price-range">₹199 - ₹1299</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Succulents -->
+                <div class="category-card" onclick="exploreCategory('succulent')">
+                    <div class="category-image">🌵</div>
+                    <div class="category-info">
+                        <h3 class="category-name">Succulents & Cacti</h3>
+                        <p class="category-description">Low-water plants perfect for busy lifestyles. Unique shapes and textures for modern spaces.</p>
+                        <div class="category-meta">
+                            <span class="plant-count">28 Plants Available</span>
+                            <span class="difficulty-level difficulty-beginner">Beginner</span>
+                        </div>
+                        <div class="category-features">
+                            <span class="feature-tag">Drought Tolerant</span>
+                            <span class="feature-tag">Unique Shapes</span>
+                            <span class="feature-tag">Minimal Care</span>
+                        </div>
+                        <div class="category-action">
+                            <button class="explore-btn">Explore Collection</button>
+                            <span class="price-range">₹99 - ₹599</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flowering Plants -->
+                <div class="category-card" onclick="exploreCategory('flowering')">
+                    <div class="category-image">🌸</div>
+                    <div class="category-info">
+                        <h3 class="category-name">Flowering Plants</h3>
+                        <p class="category-description">Beautiful blooms to add color and fragrance to your space. Seasonal and perennial varieties.</p>
+                        <div class="category-meta">
+                            <span class="plant-count">32 Plants Available</span>
+                            <span class="difficulty-level difficulty-intermediate">Intermediate</span>
+                        </div>
+                        <div class="category-features">
+                            <span class="feature-tag">Colorful Blooms</span>
+                            <span class="feature-tag">Fragrant</span>
+                            <span class="feature-tag">Seasonal</span>
+                        </div>
+                        <div class="category-action">
+                            <button class="explore-btn">Explore Collection</button>
+                            <span class="price-range">₹129 - ₹799</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medicinal Plants -->
+                <div class="category-card" onclick="exploreCategory('medicinal')">
+                    <div class="category-image">🌿</div>
+                    <div class="category-info">
+                        <h3 class="category-name">Medicinal & Herbs</h3>
+                        <p class="category-description">Traditional healing plants and culinary herbs. Grow your own natural pharmacy and spice garden.</p>
+                        <div class="category-meta">
+                            <span class="plant-count">22 Plants Available</span>
+                            <span class="difficulty-level difficulty-beginner">Beginner</span>
+                        </div>
+                        <div class="category-features">
+                            <span class="feature-tag">Healing Properties</span>
+                            <span class="feature-tag">Edible</span>
+                            <span class="feature-tag">Aromatic</span>
+                        </div>
+                        <div class="category-action">
+                            <button class="explore-btn">Explore Collection</button>
+                            <span class="price-range">₹99 - ₹499</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fruit Plants -->
+                <div class="category-card" onclick="exploreCategory('fruit')">
+                    <div class="category-image">🍎</div>
+                    <div class="category-info">
+                        <h3 class="category-name">Fruit Plants</h3>
+                        <p class="category-description">Grow your own organic fruits. Container-friendly dwarf varieties and traditional fruit trees.</p>
+                        <div class="category-meta">
+                            <span class="plant-count">18 Plants Available</span>
+                            <span class="difficulty-level difficulty-advanced">Advanced</span>
+                        </div>
+                        <div class="category-features">
+                            <span class="feature-tag">Edible Fruits</span>
+                            <span class="feature-tag">Dwarf Varieties</span>
+                            <span class="feature-tag">Long Term</span>
+                        </div>
+                        <div class="category-action">
+                            <button class="explore-btn">Explore Collection</button>
+                            <span class="price-range">₹299 - ₹1999</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popular Plants Section -->
+        <div class="popular-section">
+            <h2 class="section-title">⭐ Most Popular Plants</h2>
+            <div class="popular-grid">
+                <div class="popular-plant" onclick="showQuickView('monstera')">
+                    <div class="popular-plant-icon">🌿</div>
+                    <div class="popular-plant-name">Monstera Deliciosa</div>
+                    <div class="popular-plant-price">₹599</div>
+                </div>
+                <div class="popular-plant" onclick="showQuickView('snake')">
+                    <div class="popular-plant-icon">🪴</div>
+                    <div class="popular-plant-name">Snake Plant</div>
+                    <div class="popular-plant-price">₹349</div>
+                </div>
+                <div class="popular-plant" onclick="showQuickView('pothos')">
+                    <div class="popular-plant-icon">🌿</div>
+                    <div class="popular-plant-name">Golden Pothos</div>
+                    <div class="popular-plant-price">₹199</div>
+                </div>
+                <div class="popular-plant" onclick="showQuickView('peace-lily')">
+                    <div class="popular-plant-icon">🌺</div>
+                    <div class="popular-plant-name">Peace Lily</div>
+                    <div class="popular-plant-price">₹449</div>
+                </div>
+                <div class="popular-plant" onclick="showQuickView('aloe')">
+                    <div class="popular-plant-icon">🌵</div>
+                    <div class="popular-plant-name">Aloe Vera</div>
+                    <div class="popular-plant-price">₹249</div>
+                </div>
+                <div class="popular-plant" onclick="showQuickView('jade')">
+                    <div class="popular-plant-icon">🍀</div>
+                    <div class="popular-plant-name">Jade Plant</div>
+                    <div class="popular-plant-price">₹299</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Care Tips Section -->
+        <div class="categories-section">
+            <h2 class="section-title">💡 Plant Care Tips by Category</h2>
+            <div class="tips-section">
+                <div class="tip-card">
+                    <div class="tip-icon">💧</div>
+                    <h3 class="tip-title">Indoor Plant Watering</h3>
+                    <p class="tip-description">Most indoor plants prefer slightly moist soil. Check soil moisture by inserting your finger 1-2 inches deep. Water when the top inch feels dry.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">☀️</div>
+                    <h3 class="tip-title">Light Requirements</h3>
+                    <p class="tip-description">Outdoor plants generally need 6-8 hours of direct sunlight, while indoor plants thrive in bright, indirect light. Rotate plants weekly for even growth.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🌡️</div>
+                    <h3 class="tip-title">Temperature Control</h3>
+                    <p class="tip-description">Keep indoor plants between 65-75°F (18-24°C). Avoid placing them near heating vents or air conditioners for consistent temperature.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">✂️</div>
+                    <h3 class="tip-title">Pruning & Maintenance</h3>
+                    <p class="tip-description">Regular pruning promotes healthy growth. Remove dead, diseased, or yellowing leaves promptly. Trim back overgrown branches in late winter.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: var(--primary-green); margin: 0;">🔍 Search Plants</h2>
+                <button onclick="closeSearchModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <input type="text" class="search-modal-input" id="modalSearchInput" placeholder="Search categories, plants, features..." onkeypress="if(event.key==='Enter') modalSearch()">
+            <button onclick="modalSearch()" style="width: 100%; padding: 15px; background: var(--primary-green); color: white; border: none; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                Search
+            </button>
+            <div id="quickSearchResults" style="margin-top: 20px; max-height: 300px; overflow-y: auto;">
+                <!-- Quick search results will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-modal" id="quickViewModal">
+        <div class="quick-view-content">
+            <div class="quick-view-header">
+                <h2 style="color: var(--primary-green); margin: 0;">Plant Details</h2>
+                <button onclick="closeQuickView()" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #666;">✕</button>
+            </div>
+            <div class="quick-view-body" id="quickViewBody">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="account-modal" id="accountModal">
+        <div class="account-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 style="color: var(--primary-green); margin: 0;">👤 My Account</h2>
+                <button onclick="closeAccountModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <button class="account-btn" onclick="window.location.href='login.html'">🔐 Login</button>
+            <button class="account-btn secondary" onclick="window.location.href='register.html'">📝 Register</button>
+            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Quick Access</p>
+                <a href="dashboard.html" class="menu-link" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">📊 My Dashboard</a>
+                <a href="dashboard.html" class="menu-link"
+   onclick="localStorage.setItem('openSection','orders')" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">📦 My Orders</a>
+                <a href="wishlist.html" class="menu-link" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">❤️ My Wishlist</a>
+                <a href="dashboard.html" class="menu-link"
+   onclick="localStorage.setItem('openSection','profile')"
+   style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none;">
+   ⚙️ Settings
+</a>
+        </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🌿 GreenVibe</h3>
+                <p>Your trusted partner for premium quality plants. Bringing nature closer to your home with care and expertise.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="YouTube">📹</a>
+                </div>
+            </div>
+            
+           <div class="footer-section">
+    <h3>Quick Links</h3>
+    <ul>
+        <li><a href="shop.html">Shop Plants</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="plantcare.html">Plant Care Guide</a></li>
+        <li><a href="blog.html">Blog & Tips</a></li>
+        <li><a href="dashboard.html" onclick="localStorage.setItem('openSection','orders')">
+Track Order
+</a></li>
+    </ul>
+</div>
+
+<div class="footer-section">
+    <h3>Customer Service</h3>
+    <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html#faq">FAQ</a></li>
+        <li>
+  <a href="dashboard.html" onclick="localStorage.setItem('openSection','shipping')">
+    🚚 Shipping Info
+  </a>
+</li>
+
+<li>
+  <a href="dashboard.html" onclick="localStorage.setItem('openSection','returns')">
+    🔁 Returns & Refunds
+  </a>
+</li>
+    </ul>
+</div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📧 support@greenvibe.com</p>
+                <p>📞 +91 98765 43210</p>
+                <p>📍 123 Green Street, Plant City, Mumbai, India 400001</p>
+                <p>⏰ Mon-Sat: 9AM - 7PM</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 GreenVibe. All rights reserved. | <a href="privacy policy.html">Privacy Policy</a> | <a href="terms and conditions.html">Terms of Service</a></p>
+        </div>
+        </div>
+    </footer>
+
+    <script>
+        // State Management
+        let wishlist = [];
+        let cart = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounts();
+            animateOnScroll();
+        });
+
+        // Category Data
+        const categoryData = {
+            indoor: {
+                name: 'Indoor Plants',
+                description: 'Perfect houseplants for every room',
+                plants: ['Monstera', 'Snake Plant', 'Pothos', 'Peace Lily', 'Rubber Plant', 'ZZ Plant']
+            },
+            outdoor: {
+                name: 'Outdoor Plants',
+                description: 'Hardy plants for gardens and terraces',
+                plants: ['Bougainvillea', 'Hibiscus', 'Rose', 'Jasmine', 'Marigold', 'Neem']
+            },
+            succulent: {
+                name: 'Succulents & Cacti',
+                description: 'Low-maintenance desert beauties',
+                plants: ['Aloe Vera', 'Jade Plant', 'Echeveria', 'Christmas Cactus', 'Barrel Cactus', 'Haworthia']
+            },
+            flowering: {
+                name: 'Flowering Plants',
+                description: 'Colorful blooms for every season',
+                plants: ['Hibiscus', 'Rose', 'Jasmine', 'Marigold', 'Bougainvillea', 'Lily']
+            },
+            medicinal: {
+                name: 'Medicinal & Herbs',
+                description: 'Natural healing and culinary herbs',
+                plants: ['Tulsi', 'Neem', 'Lavender', 'Mint', 'Aloe Vera', 'Turmeric']
+            },
+            fruit: {
+                name: 'Fruit Plants',
+                description: 'Grow your own organic fruits',
+                plants: ['Lemon Tree', 'Guava', 'Pomegranate', 'Fig Tree', 'Orange Tree', 'Mango Sapling']
+            }
+        };
+
+        // Popular Plants Database
+        const popularPlants = {
+            'monstera': {
+                name: 'Monstera Deliciosa',
+                icon: '🌿',
+                price: 599,
+                rating: 4.8,
+                reviews: 234,
+                category: 'Indoor',
+                description: 'The iconic Monstera Deliciosa, also known as the Swiss Cheese Plant, features stunning split leaves that bring a tropical vibe to any space. Perfect for beginners and experienced plant parents alike.',
+                features: ['Air Purifying', 'Low Maintenance', 'Fast Growing', 'Pet Friendly'],
+                care: 'Bright indirect light, water weekly'
+            },
+            'snake': {
+                name: 'Snake Plant',
+                icon: '🪴',
+                price: 349,
+                rating: 4.9,
+                reviews: 456,
+                category: 'Indoor',
+                description: 'One of the hardiest indoor plants, the Snake Plant thrives on neglect. It purifies air by removing toxins and produces oxygen at night, making it perfect for bedrooms.',
+                features: ['Air Purifying', 'Low Light', 'Drought Tolerant', 'Beginner Friendly'],
+                care: 'Low to bright light, water every 2-3 weeks'
+            },
+            'pothos': {
+                name: 'Golden Pothos',
+                icon: '🌿',
+                price: 199,
+                rating: 4.7,
+                reviews: 389,
+                category: 'Indoor',
+                description: 'The Golden Pothos is a beautiful trailing plant with heart-shaped leaves. It\'s incredibly easy to care for and grows quickly, making it perfect for hanging baskets or shelves.',
+                features: ['Air Purifying', 'Low Maintenance', 'Trailing Vine', 'NASA Approved'],
+                care: 'Medium to bright indirect light, water when soil is dry'
+            },
+            'peace-lily': {
+                name: 'Peace Lily',
+                icon: '🌺',
+                price: 449,
+                rating: 4.6,
+                reviews: 178,
+                category: 'Flowering',
+                description: 'The elegant Peace Lily features beautiful white flowers and glossy green leaves. It\'s excellent for improving indoor air quality and thrives in low light conditions.',
+                features: ['Air Purifying', 'Low Light', 'Flowering', 'Easy Care'],
+                care: 'Low to medium light, keep soil moist'
+            },
+            'aloe': {
+                name: 'Aloe Vera',
+                icon: '🌵',
+                price: 249,
+                rating: 4.8,
+                reviews: 312,
+                category: 'Medicinal',
+                description: 'Aloe Vera is not just a beautiful succulent, it\'s a natural medicine cabinet! The gel inside its leaves can soothe burns, moisturize skin, and promote healing.',
+                features: ['Medicinal', 'Drought Tolerant', 'Easy Care', 'Healing Properties'],
+                care: 'Bright indirect light, water every 2-3 weeks'
+            },
+            'jade': {
+                name: 'Jade Plant',
+                icon: '🍀',
+                price: 299,
+                rating: 4.7,
+                reviews: 267,
+                category: 'Succulent',
+                description: 'The Jade Plant, also called the Money Plant, is believed to bring good luck and prosperity. Its thick, woody stems and oval-shaped leaves make it a stunning addition to any space.',
+                features: ['Low Maintenance', 'Drought Tolerant', 'Lucky Plant', 'Long-lived'],
+                care: 'Bright light, water when soil is completely dry'
+            }
+        };
+
+        // Explore Category Function
+        function exploreCategory(category) {
+            // Redirect to shop page with category filter
+            window.location.href = 'shop.html?category=' + category;
+        }
+
+        // Go to Shop Function
+        function goToShop(plantType) {
+            window.location.href = 'shop.html?search=' + plantType;
+        }
+
+        // Show Quick View Modal
+        function showQuickView(plantId) {
+            const plant = popularPlants[plantId];
+            if (!plant) return;
+
+            const modal = document.getElementById('quickViewModal');
+            const body = document.getElementById('quickViewBody');
+
+            body.innerHTML = `
+                <div class="quick-view-grid">
+                    <div class="quick-view-image">${plant.icon}</div>
+                    <div class="quick-view-details">
+                        <h2>${plant.name}</h2>
+                        <div class="quick-view-price">₹${plant.price}</div>
+                        <div class="quick-view-rating">
+                            <span style="color: #ffc107;">⭐</span>
+                            <span style="font-weight: 600;">${plant.rating}</span>
+                            <span style="color: #666;">(${plant.reviews} reviews)</span>
+                        </div>
+                        <p class="quick-view-description">${plant.description}</p>
+                        <div class="quick-view-features">
+                            ${plant.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                        </div>
+                        <div style="padding: 15px; background: rgba(139, 195, 74, 0.1); border-radius: 15px; margin-bottom: 25px;">
+                            <div style="font-weight: 600; color: var(--primary-green); margin-bottom: 5px;">🌱 Care Instructions</div>
+                            <div style="font-size: 14px; color: #666;">${plant.care}</div>
+                        </div>
+                        <div class="quick-view-actions">
+                            <button class="qv-btn qv-btn-primary" onclick="addToCart('${plantId}'); showToast('Added to cart!')">🛒 Add to Cart</button>
+                            <button class="qv-btn qv-btn-secondary" onclick="toggleWishlist('${plantId}'); showToast('Added to wishlist!')">❤️ Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #e0e0e0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="color: var(--primary-green); margin: 0;">Additional Information</h3>
+                        <span style="color: #666; font-size: 14px;">Category: <strong>${plant.category}</strong></span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 24px; margin-bottom: 5px;">📦</div>
+                            <div style="font-weight: 600; margin-bottom: 3px;">Pot Size</div>
+                            <div style="font-size: 14px; color: #666;">6-8 inches</div>
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 24px; margin-bottom: 5px;">📏</div>
+                            <div style="font-weight: 600; margin-bottom: 3px;">Plant Height</div>
+                            <div style="font-size: 14px; color: #666;">12-18 inches</div>
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 24px; margin-bottom: 5px;">🚚</div>
+                            <div style="font-weight: 600; margin-bottom: 3px;">Delivery</div>
+                            <div style="font-size: 14px; color: #666;">3-5 business days</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // Close Quick View Modal
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.remove('active');
+        }
+
+        // Add to Cart Function
+        function addToCart(plantId) {
+            const plant = popularPlants[plantId];
+            if (!plant) return;
+
+            const existingItem = cart.find(item => item.id === plantId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    id: plantId,
+                    name: plant.name,
+                    price: plant.price,
+                    quantity: 1
+                });
+            }
+            updateCounts();
+        }
+
+        // Toggle Wishlist Function
+        function toggleWishlist(plantId) {
+            const index = wishlist.indexOf(plantId);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+            } else {
+                wishlist.push(plantId);
+            }
+            updateCounts();
+        }
+
+        // Show Toast Notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: var(--primary-green);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 50px;
+                font-weight: 600;
+                z-index: 4000;
+                animation: slideInUp 0.3s ease-out;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+
+        // Update Badge Counts
+        function updateCounts() {
+            document.getElementById('wishlistCount').textContent = wishlist.length;
+            document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        // Animate Elements on Scroll
+        function animateOnScroll() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe category cards and tip cards
+            document.querySelectorAll('.category-card, .tip-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+        }
+
+        // Search Modal Functions
+        function openSearchModal() {
+            document.getElementById('searchModal').classList.add('active');
+            document.getElementById('modalSearchInput').focus();
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.remove('active');
+        }
+
+        function modalSearch() {
+            const searchTerm = document.getElementById('modalSearchInput').value.toLowerCase();
+            const resultsDiv = document.getElementById('quickSearchResults');
+            
+            if (!searchTerm) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">Type to search categories or plants...</p>';
+                return;
+            }
+            
+            // Search through categories
+            const results = [];
+            
+            Object.keys(categoryData).forEach(key => {
+                const category = categoryData[key];
+                if (category.name.toLowerCase().includes(searchTerm) || 
+                    category.description.toLowerCase().includes(searchTerm) ||
+                    category.plants.some(plant => plant.toLowerCase().includes(searchTerm))) {
+                    results.push({
+                        type: 'category',
+                        name: category.name,
+                        description: category.description,
+                        action: () => exploreCategory(key)
+                    });
+                }
+            });
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">No categories found</p>';
+            } else {
+                resultsDiv.innerHTML = results.slice(0, 5).map((result, index) => `
+                        <div style="display: flex; gap: 15px; align-items: center;">
+                            <div style="font-size: 30px;">🗂️</div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; color: var(--primary-green); margin-bottom: 3px;">${result.name}</div>
+                                <div style="font-size: 12px; color: #666;">${result.description}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Account Modal Functions
+        function openAccountModal() {
+            document.getElementById('accountModal').classList.add('active');
+        }
+
+        function closeAccountModal() {
+            document.getElementById('accountModal').classList.remove('active');
+        }
+
+        // Close modals on outside click
+        document.getElementById('searchModal').addEventListener('click', (e) => {
+            if (e.target.id === 'searchModal') {
+                closeSearchModal();
+            }
+        });
+
+        document.getElementById('accountModal').addEventListener('click', (e) => {
+            if (e.target.id === 'accountModal') {
+                closeAccountModal();
+            }
+        });
+
+        document.getElementById('quickViewModal').addEventListener('click', (e) => {
+            if (e.target.id === 'quickViewModal') {
+                closeQuickView();
+            }
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced category card interactions
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Hero card parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-card');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.1;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - GreenVibe | Our Story & Mission</title>
+    <style>
+        :root {
+            --primary-green: #2d5f3f;
+            --light-green: #4a8c5e;
+            --accent-green: #8bc34a;
+            --dark-bg: #1a2f23;
+            --cream: #f5f5dc;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --red-heart: #ff4757;
+            --card-shadow: 0 4px 15px rgba(45, 95, 63, 0.1);
+            --hover-shadow: 0 8px 25px rgba(45, 95, 63, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: var(--shadow) 0 2px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .announcement-bar {
+            background: var(--primary-green);
+            color: var(--white);
+            text-align: center;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-menu a.active {
+            color: var(--primary-green);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-green);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            position: relative;
+            text-decoration: none;
+            font-size: 20px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .nav-icons a:hover {
+            color: var(--primary-green);
+        }
+
+        .cart-count, .wishlist-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--red-heart);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 120px;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--cream) 0%, #e8f5e8 100%);
+            margin-bottom: 4rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '🌱';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            font-size: 60px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '💚';
+            position: absolute;
+            bottom: 30px;
+            right: 60px;
+            font-size: 50px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite reverse;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: slideInFromBottom 1s ease-out 0.3s both;
+        }
+
+        /* Our Story Section */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+        }
+
+        .story-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            animation: slideInFromLeft 0.8s ease-out;
+        }
+
+        .story-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            animation: slideInFromLeft 0.8s ease-out 0.2s both;
+        }
+
+        .story-image {
+            background: linear-gradient(45deg, var(--primary-green), var(--light-green));
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            animation: slideInFromRight 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: var(--white);
+            padding: 4rem 0;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--cream) 0%, #f0f8f0 100%);
+            transition: all 0.3s ease;
+            animation: slideInFromBottom 0.8s ease-out;
+            cursor: pointer;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .mission-card:nth-child(1) { animation-delay: 0.1s; }
+        .mission-card:nth-child(2) { animation-delay: 0.2s; }
+        .mission-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .mission-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        .mission-card:nth-child(2) .mission-icon {
+            animation-delay: 0.3s;
+        }
+
+        .mission-card:nth-child(3) .mission-icon {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        /* Team Section */
+        .team-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            animation: slideInFromBottom 0.8s ease-out;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .team-member:nth-child(1) { animation-delay: 0.1s; }
+        .team-member:nth-child(2) { animation-delay: 0.2s; }
+        .team-member:nth-child(3) { animation-delay: 0.3s; }
+        .team-member:nth-child(4) { animation-delay: 0.4s; }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-avatar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 4s infinite;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: var(--light-green);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        /* Values Section */
+        .values-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .values-section::before {
+            content: '🌿';
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            font-size: 80px;
+            opacity: 0.2;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 1.5rem;
+            animation: slideInFromBottom 0.8s ease-out;
+        }
+
+        .value-item:nth-child(1) { animation-delay: 0.1s; }
+        .value-item:nth-child(2) { animation-delay: 0.2s; }
+        .value-item:nth-child(3) { animation-delay: 0.3s; }
+        .value-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .value-item:nth-child(2) .value-icon { animation-delay: 0.5s; }
+        .value-item:nth-child(3) .value-icon { animation-delay: 1s; }
+        .value-item:nth-child(4) .value-icon { animation-delay: 1.5s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .value-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: var(--white);
+            padding: 4rem 0;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--cream) 0%, #f0f8f0 100%);
+            transition: all 0.3s ease;
+            animation: slideInFromBottom 0.8s ease-out;
+            cursor: pointer;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.1s; }
+        .stat-item:nth-child(2) { animation-delay: 0.2s; }
+        .stat-item:nth-child(3) { animation-delay: 0.3s; }
+        .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stat-label {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Contact CTA Section */
+        .contact-cta {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--light-green) 100%);
+            color: var(--primary-green);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta::before {
+            content: '💬';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 50px;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .contact-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: slideInFromTop 0.8s ease-out;
+        }
+
+        .contact-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideInFromBottom 0.8s ease-out 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInFromBottom 0.8s ease-out 0.4s both;
+        }
+
+        .cta-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--light-green);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .cta-btn.secondary:hover {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-result-item:hover {
+            background: var(--cream);
+        }
+
+        /* Animations */
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10001;
+            animation: slideInFromRight 0.3s ease-out;
+            display: none;
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .mission-card, .team-member, .stat-item {
+                margin-bottom: 1rem;
+            }
+        }
+        .search-modal,
+.account-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+}
+
+/* THIS IS WHAT YOU MISSED */
+.search-modal.active,
+.account-modal.active {
+  display: block;
+}
+/* Search Bar */
+        .search-section {
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.2);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--light-green);
+        }
+
+        /* MODAL BASE */
+.search-modal,
+.account-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-modal.active,
+.account-modal.active {
+  display: flex;
+}
+
+/* CONTENT */
+.search-modal-content,
+.account-modal-content {
+  background: #fff;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  padding: 30px;
+}
+
+/* HEADER */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-header button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* SEARCH */
+.search-modal-input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #2d5f3f;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.search-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2d5f3f;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.search-results {
+  margin-top: 15px;
+}
+
+/* ACCOUNT */
+.account-btn {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  border: none;
+  background: #2d5f3f;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.account-btn.secondary {
+  background: white;
+  color: #2d5f3f;
+  border: 2px solid #2d5f3f;
+}
+
+.account-links a {
+  display: block;
+  padding: 8px;
+  color: #2d5f3f;
+  text-decoration: none;
+}
+
+ /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 60px 30px 30px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .social-icon:hover {
+            background: var(--accent-green);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="announcement-bar">
+            🎉 Special Offer: Get 20% OFF on orders above ₹1499 | Use Code: GREEN20
+        </div>
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                GreenVibe
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="plantcare.html">Plant Care</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="#" onclick="openSearchModal()">🔍</a>
+                <a href="#" onclick="openAccountModal()">👤</a>
+                <a href="wishlist.html">❤️</span></a>
+                <a href="cart.html">🛒</span></a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1>🌿 About GreenVibe</h1>
+                <p>Cultivating green spaces, nurturing plant lovers, and growing a sustainable future together since 2020</p>
+            </section>
+
+            <!-- Our Story Section -->
+            <section class="story-section">
+                <div class="story-content">
+                    <h2>Our Growing Story</h2>
+                    <p>GreenVibe began as a small passion project in 2020 when our founder, a plant enthusiast, struggled to find high-quality plants and reliable care information in one place. What started as a weekend hobby quickly blossomed into a mission to make plant parenthood accessible to everyone.</p>
+                    <p>We believe that every space deserves the beauty and benefits of plants. Whether you're a seasoned gardener or just beginning your plant journey, GreenVibe is here to support you with carefully curated plants, expert guidance, and a community that shares your green passion.</p>
+                    <p>Today, we've helped over 10,000 plant parents create their perfect green spaces, and we're just getting started!</p>
+                </div>
+                <div class="story-image">
+                    🌱
+                </div>
+            </section>
+
+            <!-- Mission Section -->
+            <section class="mission-section">
+                <div class="section-header">
+                    <h2>Our Mission</h2>
+                    <p>We're committed to bringing nature into every home and heart</p>
+                </div>
+                <div class="mission-grid">
+                    <div class="mission-card" onclick="showMissionDetail('quality')">
+                        <div class="mission-icon">🌿</div>
+                        <h3>Premium Quality</h3>
+                        <p>We source only the healthiest plants from trusted growers, ensuring every plant arrives in perfect condition ready to thrive in your space.</p>
+                    </div>
+                    <div class="mission-card" onclick="showMissionDetail('education')">
+                        <div class="mission-icon">📚</div>
+                        <h3>Plant Education</h3>
+                        <p>Empowering plant parents with comprehensive care guides, expert tips, and ongoing support to help your plants flourish.</p>
+                    </div>
+                    <div class="mission-card" onclick="showMissionDetail('sustainability')">
+                        <div class="mission-icon">🌍</div>
+                        <h3>Sustainability</h3>
+                        <p>Committed to eco-friendly practices, from sustainable packaging to supporting local growers and promoting air-purifying plants.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section class="team-section">
+                <div class="section-header">
+                    <h2>Meet Our Green Team</h2>
+                    <p>The passionate plant lovers behind GreenVibe</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member" onclick="showTeamDetail('sarah')">
+                        <div class="member-avatar">🌺</div>
+                        <div class="member-name">Sarah Green</div>
+                        <div class="member-role">Founder & Plant Expert</div>
+                        <div class="member-bio">With 15+ years in horticulture, Sarah brings deep plant knowledge and a passion for making plant care accessible to everyone.</div>
+                    </div>
+                    <div class="team-member" onclick="showTeamDetail('mike')">
+                        <div class="member-avatar">🌿</div>
+                        <div class="member-name">Mike Chen</div>
+                        <div class="member-role">Plant Care Specialist</div>
+                        <div class="member-bio">Our plant whisperer who creates the comprehensive care guides and troubleshoots plant problems with expert precision.</div>
+                    </div>
+                    <div class="team-member" onclick="showTeamDetail('emma')">
+                        <div class="member-avatar">🌸</div>
+                        <div class="member-name">Emma Rodriguez</div>
+                        <div class="member-role">Customer Success Manager</div>
+                        <div class="member-bio">Emma ensures every customer has an amazing experience and gets the support they need for their plant journey.</div>
+                    </div>
+                    <div class="team-member" onclick="showTeamDetail('alex')">
+                        <div class="member-avatar">🌱</div>
+                        <div class="member-name">Alex Johnson</div>
+                        <div class="member-role">Sustainability Officer</div>
+                        <div class="member-bio">Leading our eco-friendly initiatives and ensuring GreenVibe operates with minimal environmental impact.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Values Section -->
+            <section class="values-section">
+                <div class="section-header">
+                    <h2 style="color: white;">Our Core Values</h2>
+                    <p style="color: white; opacity: 0.9;">The principles that guide everything we do</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-icon">💚</div>
+                        <h3>Passion</h3>
+                        <p>We genuinely love plants and it shows in everything we do, from our careful plant selection to our detailed care guides.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🤝</div>
+                        <h3>Community</h3>
+                        <p>Building a supportive community of plant lovers who share knowledge, celebrate successes, and help each other grow.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">⭐</div>
+                        <h3>Excellence</h3>
+                        <p>Committed to providing the highest quality plants, exceptional service, and the best possible plant parent experience.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🌱</div>
+                        <h3>Growth</h3>
+                        <p>Continuously learning, improving, and helping our customers grow not just plants, but confidence and joy in plant care.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <div class="section-header">
+                    <h2>GreenVibe by the Numbers</h2>
+                    <p>Our growing impact in the plant community</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item" onclick="animateStat(this)">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Happy Plant Parents</div>
+                    </div>
+                    <div class="stat-item" onclick="animateStat(this)">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Plant Varieties</div>
+                    </div>
+                    <div class="stat-item" onclick="animateStat(this)">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Customer Satisfaction</div>
+                    </div>
+                    <div class="stat-item" onclick="animateStat(this)">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Years of Growth</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact CTA Section -->
+            <section class="contact-cta">
+                <h2>Let's Grow Together!</h2>
+                <p>Have questions? Want to join our team? Or just want to chat about plants? We'd love to hear from you!</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="cta-btn">Get in Touch</a>
+                    <a href="blog.html" class="cta-btn secondary">Read Our Blog</a>
+                    <a href="shop.html" class="cta-btn secondary">Shop Plants</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GreenVibe</h3>
+                <p>Your trusted partner in creating beautiful, thriving plant spaces. Quality plants, expert care, and passionate service.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" style="margin-right: 1rem;">📘 Facebook</a>
+                    <a href="#" style="margin-right: 1rem;">📷 Instagram</a>
+                    <a href="#" style="margin-right: 1rem;">🐦 Twitter</a>
+                </div>
+            </div>
+            <div class="footer-section">
+    <h3>Quick Links</h3>
+    <ul>
+        <li><a href="shop.html">Shop Plants</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="plantcare.html">Plant Care Guide</a></li>
+        <li><a href="blog.html">Blog & Tips</a></li>
+        <li><a href="dashboard.html" onclick="localStorage.setItem('openSection','orders')">
+Track Order
+</a></li>
+    </ul>
+</div>
+
+<div class="footer-section">
+    <h3>Customer Service</h3>
+    <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html#faq">FAQ</a></li>
+        <li>
+  <a href="dashboard.html" onclick="localStorage.setItem('openSection','shipping')">
+    🚚 Shipping Info
+  </a>
+</li>
+
+<li>
+  <a href="dashboard.html" onclick="localStorage.setItem('openSection','returns')">
+    🔁 Returns & Refunds
+  </a>
+</li>
+    </ul>
+</div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 123 Garden Street, Plant City, PC 12345</p>
+                <p>📞 +91 9876543210</p>
+                <p>📧 info@greenvibe.com</p>
+                <p>🕒 Mon-Sat: 9AM-7PM, Sun: 10AM-6PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 GreenVibe. All rights reserved. | <a href="privacy policy.html">Privacy Policy</a> | <a href="terms and conditions.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: var(--primary-green); margin: 0;">🔍 Search Plants</h2>
+                <button onclick="closeSearchModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <input type="text" class="search-modal-input" id="modalSearchInput" placeholder="Search for plants, succulents, flowers..." onkeypress="if(event.key==='Enter') modalSearch()">
+            <button onclick="modalSearch()" style="width: 100%; padding: 15px; background: var(--primary-green); color: white; border: none; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                Search
+            </button>
+            <div id="quickSearchResults" style="margin-top: 20px; max-height: 300px; overflow-y: auto; scrollbar-width: none;">
+                <!-- Quick search results will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="account-modal" id="accountModal">
+        <div class="account-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 style="color: var(--primary-green); margin: 0;">👤 My Account</h2>
+                <button onclick="closeAccountModal()" style="background: none; border: none; font-size: 24px; cursor: pointer;">✕</button>
+            </div>
+            <button class="account-btn" onclick="window.location.href='login.html'">🔐 Login</button>
+            <button class="account-btn secondary" onclick="window.location.href='register.html'">📝 Register</button>
+            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Quick Access</p>
+                <a href="dashboard.html" class="menu-link" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">📊 My Dashboard</a>
+                <a href="dashboard.html" class="menu-link"
+   onclick="localStorage.setItem('openSection','orders')" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">📦 My Orders</a>
+                <a href="wishlist.html" class="menu-link" style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none; margin-bottom: 5px;">❤️ My Wishlist</a>
+                <a href="dashboard.html" class="menu-link"
+   onclick="localStorage.setItem('openSection','profile')"
+   style="display: block; padding: 10px; color: var(--primary-green); text-decoration: none;">
+   ⚙️ Settings
+</a>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Mission detail function
+        function showMissionDetail(type) {
+            const messages = {
+                quality: 'We work directly with certified growers and inspect every plant before shipping to ensure you receive the healthiest plants possible! 🌿',
+                education: 'Our expert team creates detailed care guides, video tutorials, and provides ongoing support to help you become a confident plant parent! 📚',
+                sustainability: 'We use eco-friendly packaging, support local growers, and donate 1% of profits to reforestation projects! 🌍'
+            };
+            showToast(messages[type]);
+        }
+
+        // Team detail function
+        function showTeamDetail(member) {
+            const details = {
+                sarah: 'Sarah founded GreenVibe after 15 years in professional horticulture. She personally selects every plant variety we offer! 🌺',
+                mike: 'Mike has saved thousands of plants with his expert troubleshooting skills. He\'s our go-to for any plant emergency! 🌿',
+                emma: 'Emma ensures every customer feels supported throughout their plant journey. She loves helping new plant parents succeed! 🌸',
+                alex: 'Alex leads our sustainability initiatives and has reduced our carbon footprint by 40% since joining the team! 🌱'
+            };
+            showToast(details[member]);
+        }
+
+        // Animate statistics
+        function animateStat(element) {
+            const statNumber = element.querySelector('.stat-number');
+            statNumber.style.animation = 'none';
+            statNumber.offsetHeight; // Trigger reflow
+            statNumber.style.animation = 'pulse 0.6s ease-out';
+            
+            const messages = {
+                '10K+': 'Over 10,000 plant parents trust GreenVibe for their green spaces! 💚',
+                '500+': 'We offer over 500 carefully curated plant varieties for every space and skill level! 🌿',
+                '98%': '98% customer satisfaction rate - we love making plant parents happy! ⭐',
+                '5': 'Five amazing years of growth, learning, and spreading plant love! 🎉'
+            };
+            
+            setTimeout(() => {
+                showToast(messages[statNumber.textContent]);
+            }, 300);
+        }
+
+        // Search Modal Functions
+        function openSearchModal() {
+            document.getElementById('searchModal').classList.add('active');
+            document.getElementById('modalSearchInput').focus();
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.remove('active');
+        }
+
+        function modalSearch() {
+            const searchTerm = document.getElementById('modalSearchInput').value.toLowerCase();
+            const resultsDiv = document.getElementById('quickSearchResults');
+            
+            if (!searchTerm) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">Type to search...</p>';
+                return;
+            }
+            
+            const dummyPlants = [
+  { name: "Monstera", category: "Indoor", price: 499 },
+  { name: "Snake Plant", category: "Indoor", price: 299 },
+  { name: "Aloe Vera", category: "Succulent", price: 199 }
+];
+
+const results = dummyPlants.filter(p =>
+  p.name.toLowerCase().includes(searchTerm)
+);
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #666;">No plants found</p>';
+            } else {
+                resultsDiv.innerHTML = results.map(p => `
+                    <div onclick="quickView(${p.id}); closeSearchModal();" style="padding: 15px; margin-bottom: 10px; background: #f8f9fa; border-radius: 10px; cursor: pointer; display: flex; gap: 15px; align-items: center; transition: all 0.3s ease;" onmouseover="this.style.background='#e8f5e9'" onmouseout="this.style.background='#f8f9fa'">
+                        <div style="font-size: 40px;">${p.image.includes('svg') ? p.name.charAt(0) : '🌿'}</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--primary-green); margin-bottom: 3px;">${p.name}</div>
+                            <div style="font-size: 12px; color: #666;">${p.category} • ₹${p.price}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Account Modal Functions
+        function openAccountModal() {
+            document.getElementById('accountModal').classList.add('active');
+        }
+
+        function closeAccountModal() {
+            document.getElementById('accountModal').classList.remove('active');
+        }
+
+        // Close modals on outside click
+        document.getElementById('searchModal').addEventListener('click', (e) => {
+            if (e.target.id === 'searchModal') {
+                closeSearchModal();
+            }
+        });
+
+        document.getElementById('accountModal').addEventListener('click', (e) => {
+            if (e.target.id === 'accountModal') {
+                closeAccountModal();
+            }
+        });
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 4000);
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const searchModal = document.getElementById('searchModal');
+            const accountModal = document.getElementById('accountModal');
+            
+            if (event.target === searchModal) {
+                closeSearchModal();
+            }
+            if (event.target === accountModal) {
+                closeAccountModal();
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart and wishlist counts from localStorage if available
+            const cartCount = localStorage.getItem('cartCount') || 0;
+            const wishlistCount = localStorage.getItem('wishlistCount') || 0;
+            
+            document.querySelector('.cart-count').textContent = cartCount;
+            document.querySelector('.wishlist-count').textContent = wishlistCount;
+
+            // Show welcome message
+            setTimeout(() => {
+                showToast('Welcome to GreenVibe! Learn more about our plant-loving team! 🌿');
+            }, 1000);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

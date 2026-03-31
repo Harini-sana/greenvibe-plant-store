@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - GreenVibe</title>
+
+<style>
+:root{
+  --primary:#2d5f3f;
+  --light:#4a8c5e;
+  --accent:#8bc34a;
+  --bg:#f5f7f6;
+}
+
+body{
+  background:linear-gradient(-45deg,#e8f5e9,#f1f8e9,#e0f2f1,#f9fbe7);
+  background-size:400% 400%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* HEADER */
+.header{
+  background:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+/* MAIN */
+.container{
+  max-width:1200px;
+  margin:100px auto 40px;
+  padding:20px;
+}
+
+/* USER CARD */
+.user-card{
+  background:linear-gradient(135deg,#ffffff,#f1f8e9);
+  padding:25px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.avatar{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  color:white;
+}
+
+.user-info h2{
+  margin:0;
+}
+
+/* STATS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.card{
+  background:rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+  transition:0.3s;
+  animation:slideUp 0.6s ease;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+
+.card h3{
+  margin:10px 0;
+  color:var(--primary);
+}
+
+.number{
+  font-size:28px;
+  font-weight:bold;
+}
+
+/* ORDERS */
+.orders{
+  margin-top:30px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  animation:fadeIn 1s ease;
+}
+
+.order{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+@keyframes slideUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background: linear-gradient(135deg,#e8f5e9,#f1f8e9);
+  overflow-x:hidden;
+}
+
+/* floating background */
+.bg-float{
+  position:fixed;
+  font-size:30px;
+  opacity:0.08;
+  animation: float 6s infinite ease-in-out;
+  pointer-events:none;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+
+.checkout-modal{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.checkout-modal.active{
+  display:flex;
+}
+
+/* POPUP BOX */
+.checkout-box{
+  background:rgba(255,255,255,0.95);
+  padding:25px;
+  border-radius:16px;
+  width:90%;
+  max-width:450px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+  animation: popupScale 0.3s ease;
+}
+
+/* animation */
+@keyframes popupScale{
+  from{
+    transform:scale(0.8);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+/* inputs */
+.checkout-box input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+/* buttons */
+.checkout-box button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:var(--primary);
+  color:white;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.avatar{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  color:white;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.avatar:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 20px rgba(139,195,74,0.6);
+}
+.container{
+  max-width:1200px;
+  margin:100px auto 40px;
+  padding:20px;
+  animation:fadePage 0.6s ease;
+}
+
+@keyframes fadePage{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+.checkout-box span{
+  float:right;
+  cursor:pointer;
+  font-size:18px;
+}
+.toast{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:linear-gradient(135deg,#2d5f3f,#8bc34a);
+  color:white;
+  padding:14px 22px;
+  border-radius:12px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.3s;
+  z-index:9999;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.logout-btn{
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(135deg,#ff6b6b,#ff4757);
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.logout-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 10px 20px rgba(255,0,0,0.3);
+}
+.track-line{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:15px;
+}
+
+.step{
+  padding:10px;
+  border-left:4px solid #ccc;
+  background:#f5f5f5;
+  border-radius:8px;
+  opacity:0.6;
+  transform:translateX(-10px);
+  transition:0.3s;
+}
+
+.step.active{
+  border-left:4px solid var(--primary);
+  background:#e8f5e9;
+  opacity:1;
+  transform:translateX(0);
+}
+.progress-box{
+  margin-top:30px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+}
+
+.progress-bar{
+  height:10px;
+  background:#eee;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+#progressFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#2d5f3f,#8bc34a);
+  transition:1s;
+}
+.card:active{
+  transform:scale(0.95);
+}
+.fab{
+  position:fixed;
+  bottom:30px;
+  left:30px;
+  padding:15px;
+  border-radius:50%;
+  border:none;
+  background:var(--primary);
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+.header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.orders{
+  background:rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+}
+.checkout-box button:hover{
+  transform:scale(1.05);
+}
+.checkout-modal{
+  transition:0.3s;
+}
+.order-card{
+  padding:15px;
+  border-radius:15px;
+  background:#f9f9f9;
+  margin-bottom:15px;
+  animation:fadeUp 0.5s ease;
+}
+
+.order-item{
+  margin:5px 0;
+}
+
+.track-btn{
+  width:100%;
+  padding:12px;
+  background:#2d5f3f;
+  color:white;
+  border:none;
+  border-radius:25px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.track-btn:hover{
+  background:#4a8c5e;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+.order-list-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  margin-bottom:10px;
+  background:#f9f9f9;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.order-list-item:hover{
+  transform:translateX(5px);
+  background:#e8f5e9;
+}
+
+.back-btn{
+  background:none;
+  border:none;
+  font-size:14px;
+  cursor:pointer;
+  margin-bottom:10px;
+  color:#2d5f3f;
+}
+
+.order-detail{
+  animation:fadeUp 0.4s ease;
+}
+.empty-orders{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 20px;
+  gap:10px;
+}
+
+.empty-icon{
+  font-size:40px;
+  margin-bottom:10px;
+  opacity:0.8;
+}
+
+.empty-orders h3{
+  margin:0;
+  color:var(--primary);
+}
+
+.empty-orders p{
+  font-size:14px;
+  color:#666;
+}
+
+.shop-btn{
+  margin-top:15px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#2d5f3f,#4a8c5e);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.shop-btn:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 15px 30px rgba(0,0,0,0.25);
+}
+
+.shop-btn:active{
+  transform:scale(0.95);
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="logo">🌿 GreenVibe Dashboard</div>
+  <button class="logout-btn" onclick="openLogout()">Logout</button>
+</div>
+
+<div class="container">
+
+<!-- USER -->
+<div class="user-card">
+  <div class="avatar" onclick="openProfilePopup()" id="avatar">👤</div>
+  <div class="user-info">
+    <h2 id="username">Welcome, User</h2>
+    <p>Manage your plants, orders & wishlist 🌱</p>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+
+  <div class="card" onclick="goToCart()">
+    <div class="number" id="cartCount">0</div>
+    <h3>🛒 Cart Items</h3>
+  </div>
+
+  <div class="card" onclick="goToWishlist()">
+    <div class="number" id="wishlistCount">0</div>
+    <h3>❤️ Wishlist</h3>
+  </div>
+
+  <div class="card" onclick="openOrdersPopup()">
+    <div class="number" id="ordersCount">0</div>
+    <h3>📦 Orders</h3>
+    <p style="color:green;">● Delivered</p>
+  </div>
+
+  <div class="card">
+    <div class="number" id="totalSpent">₹0</div>
+    <h3>💰 Total Spent</h3>
+  </div>
+ 
+  <div class="card" onclick="openShippingPopup()">
+  <div class="number">🚚</div>
+  <h3>Shipping Info</h3>
+</div>
+
+<div class="card" onclick="openReturnsPopup()">
+  <div class="number">🔁</div>
+  <h3>Returns</h3>
+</div>
+
+</div>
+
+<div class="orders">
+  <h3>🌿 Suggestions for you</h3>
+  <p>Try adding indoor plants or low-maintenance plants!</p>
+</div>
+
+  <div class="progress-box">
+  <h3>🌿 Your Plant Journey</h3>
+  <div class="progress-bar">
+    <div id="progressFill"></div>
+  </div>
+</div>
+
+
+<!-- ORDERS -->
+<div class="orders">
+  <h3>📦 Recent Orders</h3>
+  <div id="ordersList"></div>
+</div>
+
+<div class="orders">
+  <h3>⚡ Recent Activity</h3>
+  <div id="activityLog"></div>
+</div>
+
+</div>
+
+<div class="bg-float" style="top:10%;left:10%">🌿</div>
+<div class="bg-float" style="top:40%;right:10%">🌱</div>
+<div class="bg-float" style="bottom:20%;left:20%">🍃</div>
+
+<button class="fab" onclick="goToCart()">🛒</button>
+
+<div class="checkout-modal" id="profileModal">
+  <div class="checkout-box">
+    <span onclick="closeProfilePopup()">✕</span>
+    <h3>Edit Profile</h3>
+
+    <input id="editName" placeholder="Name">
+    <input id="editPhone" placeholder="Phone">
+    <input id="editAddress" placeholder="Address">
+
+    <button onclick="saveProfile()">Save</button>
+  </div>
+</div>
+
+<div class="checkout-modal" id="ordersModal">
+  <div class="checkout-box">
+    <span onclick="closeOrdersPopup()">✕</span>
+    <h3>Your Orders</h3>
+    <div id="ordersPopupContent"></div>
+  </div>
+</div>
+
+<div class="checkout-modal" id="trackingModal">
+  <div class="checkout-box">
+    <span onclick="closeTracking()">✕</span>
+    <h3>Order Tracking</h3>
+
+<div class="track-line">
+  <div class="step active">📦 Packed</div>
+  <div class="step active">🚚 Shipped</div>
+  <div class="step active">📍 Out for delivery</div>
+  <div class="step">🏠 Delivered</div>
+</div>
+  </div>
+</div>
+
+<div class="checkout-modal" id="logoutModal">
+  <div class="checkout-box">
+    <h3>Logout?</h3>
+    <button onclick="confirmLogout()">Confirm</button>
+    <button onclick="closeLogout()">Cancel</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- SHIPPING POPUP -->
+<div class="checkout-modal" id="shippingModal">
+  <div class="checkout-box">
+    <span onclick="closeModal('shippingModal')">✕</span>
+    <h3>🚚 Shipping Information</h3>
+
+    <p>• Free delivery on orders above ₹999</p>
+    <p>• Delivery time: 3–7 days</p>
+    <p>• Secure plant packaging</p>
+    <p>• Live tracking available</p>
+
+  </div>
+</div>
+
+<!-- RETURNS POPUP -->
+<div class="checkout-modal" id="returnsModal">
+  <div class="checkout-box">
+    <span onclick="closeModal('returnsModal')">✕</span>
+    <h3>🔁 Returns & Refunds</h3>
+
+    <p>• 7-day return policy</p>
+    <p>• Damaged plants eligible for replacement</p>
+    <p>• Refund processed within 3–5 days</p>
+    <p>• Contact support for help</p>
+
+  </div>
+</div>
+
+<script>
+  function openShippingPopup(){
+  openModal("shippingModal");
+}
+
+function openReturnsPopup(){
+  openModal("returnsModal");
+}
+// ================== NAVIGATION ==================
+function goToCart(){
+  window.location.href = "cart.html";
+}
+
+function goToWishlist(){
+  window.location.href = "wishlist.html";
+}
+
+// ================== MODALS ==================
+function openModal(id){
+  document.getElementById(id).classList.add("active");
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove("active");
+}
+
+function openLogout(){
+  openModal("logoutModal");
+}
+
+function closeLogout(){
+  closeModal("logoutModal");
+}
+
+function closeTracking(){
+  closeModal("trackingModal");
+}
+
+function confirmLogout(){
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("currentUser");
+  window.location.href = "index.html";
+}
+
+// ================== SAFE STORAGE HELPERS ==================
+function getData(key){
+  try{
+    return JSON.parse(localStorage.getItem(key)) || [];
+  }catch{
+    return [];
+  }
+}
+
+function getUser(){
+  try{
+    return JSON.parse(localStorage.getItem("currentUser"));
+  }catch{
+    return null;
+  }
+}
+
+// ================== DASHBOARD LOAD ==================
+function loadDashboard(){
+
+  const cart = getData("cart");
+  const wishlist = getData("wishlist");
+  const orders = getData("orders");
+  const user = getUser();
+
+  // 🔐 redirect if not logged in
+  if(!user){
+    window.location.href = "login.html";
+    return;
+  }
+
+  // 👋 greeting
+  document.getElementById("username").innerText =
+    `${getGreeting()}, ${user.name || "User"}`;
+
+  // 📊 stats
+  const cartCount = cart.reduce((sum,i)=>sum+(i.qty||1),0);
+  const totalSpent = orders.reduce((sum,i)=>sum+(i.total||0),0);
+
+  animateCount("cartCount", cartCount);
+  animateCount("wishlistCount", wishlist.length);
+  animateCount("ordersCount", orders.length);
+  animateCount("totalSpent", totalSpent);
+
+  // 📦 orders list
+  const ordersDiv = document.getElementById("ordersList");
+
+  if(orders.length === 0){
+    ordersDiv.innerHTML = `
+  <div class="empty-orders">
+    <div class="empty-icon">🌱</div>
+    <h3>No orders yet</h3>
+    <p>Start your green journey today 🌿</p>
+    <button class="shop-btn" onclick="goToCart()">Start Shopping</button>
+  </div>
+`;
+  } else {
+    ordersDiv.innerHTML = orders.map(o=>`
+      <div class="order">
+        <span>${o.items?.length || 0} items</span>
+        <span>₹${o.total || 0}</span>
+      </div>
+    `).join("");
+  }
+
+  // ⚡ activity
+  const activity = document.getElementById("activityLog");
+  activity.innerHTML = orders.map(o=>`
+    <div class="order">
+      📦 Ordered ${o.items?.length || 0} plants — ₹${o.total || 0}
+    </div>
+  `).join("") || "<p>No activity yet</p>";
+
+  // 📈 progress
+  const progress = Math.min(orders.length * 20, 100);
+  const progressEl = document.getElementById("progressFill");
+  if(progressEl){
+    progressEl.style.width = progress + "%";
+  }
+
+  // ⚠️ profile reminder
+  if(!user.phone || !user.address){
+    showToast("Complete your profile ⚡");
+  }
+
+  // 👤 avatar
+  const avatar = document.getElementById("avatar");
+  if(avatar && user.name){
+    avatar.innerText = user.name.charAt(0).toUpperCase();
+  }
+}
+
+// ================== COUNTER ==================
+function animateCount(id, end){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  let start = 0;
+  const duration = 600;
+  const step = Math.max(end / (duration / 20), 1);
+
+  const counter = setInterval(()=>{
+    start += step;
+    if(start >= end){
+      el.innerText = id === "totalSpent" ? "₹" + end : end;
+      clearInterval(counter);
+    } else {
+      el.innerText = id === "totalSpent"
+        ? "₹" + Math.floor(start)
+        : Math.floor(start);
+    }
+  },20);
+}
+
+// ================== PROFILE ==================
+function openProfilePopup(){
+  const user = getUser();
+  if(!user) return;
+
+  document.getElementById("editName").value = user.name || "";
+  document.getElementById("editPhone").value = user.phone || "";
+  document.getElementById("editAddress").value = user.address || "";
+
+  openModal("profileModal");
+}
+
+function closeProfilePopup(){
+  closeModal("profileModal");
+}
+
+function saveProfile(){
+  let user = getUser();
+  let users = getData("users");
+
+  if(!user) return;
+
+  user.name = document.getElementById("editName").value;
+  user.phone = document.getElementById("editPhone").value;
+  user.address = document.getElementById("editAddress").value;
+
+  const index = users.findIndex(u => u.email === user.email);
+  if(index !== -1){
+    users[index] = user;
+  }
+
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("currentUser", JSON.stringify(user));
+
+  showToast("Profile updated ✅");
+  closeProfilePopup();
+  setTimeout(()=>location.reload(), 800);
+}
+
+// ================== ORDERS ==================
+function openOrdersPopup(){
+  const user = getUser();
+  let orders = getData("orders");
+
+  orders = orders.filter(o => o.name === user.name);
+
+  const container = document.getElementById("ordersPopupContent");
+
+  if(orders.length === 0){
+    container.innerHTML = "<p>No orders yet 🌱</p>";
+  } else {
+    container.innerHTML = orders.map((o,i)=>`
+      <div class="order-list-item" onclick="openSingleOrder(${i})">
+        <div>
+          <h4>📦 Order ${i+1}</h4>
+          <p>${o.items.length} items • ₹${o.total}</p>
+        </div>
+        <span>➡️</span>
+      </div>
+    `).join("");
+  }
+
+  openModal("ordersModal");
+}
+function openSingleOrder(index){
+  const user = getUser();
+  let orders = getData("orders");
+
+  orders = orders.filter(o => o.name === user.name);
+
+  const o = orders[index];
+  const container = document.getElementById("ordersPopupContent");
+
+  container.innerHTML = `
+    <div class="order-detail">
+
+      <button onclick="openOrdersPopup()" class="back-btn">⬅ Back</button>
+
+      <h3>📦 Order ${index+1}</h3>
+
+      <div class="order-items">
+        ${o.items.map(item=>`
+          <div class="order-item">
+            🌿 ${item.name} × ${item.qty}
+          </div>
+        `).join("")}
+      </div>
+
+      <div class="order-info">
+        <p>💰 ₹${o.total}</p>
+        <p>👤 ${o.name || "Not provided"}</p>
+        <p>📞 ${o.phone || "Not provided"}</p>
+        <p>📍 ${o.address || "Not provided"}</p>
+      </div>
+
+      <button class="track-btn" onclick="openTracking()">
+        🚚 Track Order
+      </button>
+
+    </div>
+  `;
+}
+
+function closeOrdersPopup(){
+  closeModal("ordersModal");
+}
+
+// ================== TRACKING ==================
+function openTracking(){
+  const modal = document.getElementById("trackingModal");
+  modal.classList.add("active");
+
+  const steps = modal.querySelectorAll(".step");
+  steps.forEach((step,i)=>{
+    step.classList.remove("active");
+    setTimeout(()=>{
+      step.classList.add("active");
+    }, i * 400);
+  });
+}
+
+// ================== TOAST ==================
+function showToast(msg){
+  const t = document.getElementById("toast");
+  if(!t) return;
+
+  t.innerText = msg;
+  t.classList.add("show");
+
+  setTimeout(()=>t.classList.remove("show"),2000);
+}
+
+// ================== GREETING ==================
+function getGreeting(){
+  const h = new Date().getHours();
+  if(h < 12) return "Good Morning ☀️";
+  if(h < 18) return "Good Afternoon 🌿";
+  return "Good Evening 🌙";
+}
+
+document.querySelectorAll('.menu-link').forEach(link=>{
+  link.addEventListener('click',()=>{
+    link.classList.add('active');
+  });
+});
+// ================== INIT ==================
+document.addEventListener("DOMContentLoaded", () => {
+  loadDashboard();
+
+  const section = localStorage.getItem("openSection");
+
+  if(section === "orders"){
+    openOrdersPopup();
+    localStorage.removeItem("openSection");
+  }
+
+  if(section === "profile"){
+    openProfilePopup();
+    localStorage.removeItem("openSection");
+  }
+
+  if(section === "shipping"){
+  openShippingPopup();
+  localStorage.removeItem("openSection");
+}
+
+if(section === "returns"){
+  openReturnsPopup();
+  localStorage.removeItem("openSection");
+}
+});
+
+</script>
+
+</body>
+</html>

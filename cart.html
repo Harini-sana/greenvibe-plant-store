@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart - GreenVibe</title>
+
+<style>
+:root {
+  --primary-green:#2d5f3f;
+  --light-green:#4a8c5e;
+  --accent-green:#8bc34a;
+  --text-dark:#2c3e50;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f9f9f9;
+}
+
+.header{
+  background:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+  font-size:24px;
+  color:var(--primary-green);
+  font-weight:bold;
+}
+
+.cart-container{
+  max-width:1100px;
+  margin:120px auto 40px;
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:30px;
+}
+
+.cart-items{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+}
+
+.cart-item{
+  display:flex;
+  gap:20px;
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+  align-items:center;
+  opacity:0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+
+.cart-item img{
+  width:80px;
+  height:80px;
+  border-radius:10px;
+}
+
+.item-info{flex:1;}
+
+.item-title{font-weight:bold;}
+
+.item-price{color:var(--primary-green);}
+
+.quantity{display:flex;gap:10px;align-items:center;}
+
+.quantity button{
+  padding:5px 10px;
+  border:none;
+  background:var(--primary-green);
+  color:white;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+.remove-btn{background:none;border:none;color:red;cursor:pointer;}
+
+.summary{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  height:fit-content;
+}
+
+.checkout-btn{
+  width:100%;
+  padding:12px;
+  background:var(--primary-green);
+  color:white;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+.empty{text-align:center;padding:40px;}
+
+.floating-element {
+  position: fixed;
+  opacity: 0.12;
+  font-size: 2.5rem;
+  animation: floatUpDown 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes floatUpDown {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.checkout-modal{
+  display:none;
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.checkout-modal.active{
+  display:flex;
+}
+
+.checkout-box{
+  background:white;
+  width:90%;
+  max-width:500px;
+  padding:25px;
+  border-radius:15px;
+}
+
+.close-btn{
+  float:right;
+  cursor:pointer;
+}
+
+.checkout-box input,
+.checkout-box select{
+  width:100%;
+  padding:10px;
+  margin-bottom:12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #8bc34a, #2d5f3f);
+  color: white;
+  padding: 16px 26px;
+  border-radius: 14px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cart-container{
+  animation: fadePage 0.6s ease;
+}
+
+@keyframes fadePage{
+  from{
+    opacity:0;
+    transform: translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.cart-item:hover{
+  transform: scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+.checkout-box{
+  animation: popUp 0.3s ease;
+}
+
+@keyframes popUp{
+  from{
+    transform: scale(0.8);
+    opacity:0;
+  }
+  to{
+    transform: scale(1);
+    opacity:1;
+  }
+}
+.checkout-btn:active::after{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  background:rgba(255,255,255,0.3);
+  border-radius:50%;
+  transform:scale(0);
+  animation:ripple 0.6s;
+}
+
+@keyframes ripple{
+  to{
+    transform:scale(3);
+    opacity:0;
+  }
+}
+.summary div{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px dashed #ddd;
+}
+
+.summary strong{
+  font-size:18px;
+  color:var(--primary-green);
+}
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--primary-green);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="logo" onclick="goHome()" >🌿 GreenVibe</div>
+  <div>🛒 <span id="navCartCount">0</span></div>
+</div>
+
+<div class="cart-container">
+
+<div class="cart-items" id="cartItems"></div>
+
+<div class="summary">
+  <h3>Order Summary</h3>
+  <div class="summary-row">
+  <span>Subtotal</span>
+  <span id="subtotal">₹0</span>
+</div>
+  <div>
+  <span>Shipping</span>
+  <span id="shippingCharge">₹50</span>
+</div>
+  <div style="margin-top:15px;">
+  <input type="text" id="couponInput" placeholder="Enter coupon code"
+    style="width:70%; padding:8px; border-radius:8px; border:1px solid #ccc;">
+  
+  <button onclick="applyCoupon()"
+    style="padding:8px 12px; border:none; background:#2d5f3f; color:white; border-radius:8px;">
+    Apply
+  </button>
+
+  <p id="couponMsg" style="font-size:12px; margin-top:5px;"></p>
+</div>
+<p style="font-size:12px; color:green;">
+🚚 Free Shipping on orders above ₹999
+</p>
+  <div><strong>Total</strong><strong id="total">₹0</strong></div>
+  <button class="checkout-btn" onclick="openCheckout()">
+  Proceed to Checkout
+</button>
+</div>
+
+</div>
+
+<div class="floating-element" style="top: 10%; left: 10%;">🌿</div>
+<div class="floating-element" style="top: 20%; right: 15%;">🌱</div>
+<div class="floating-element" style="bottom: 20%; left: 20%;">🍃</div>
+<div class="floating-element" style="bottom: 30%; right: 10%;">🌳</div>
+<div class="floating-element" style="top: 50%; left: 5%;">🌺</div>
+<div class="floating-element" style="top: 60%; right: 5%;">🌻</div>
+
+<!-- CHECKOUT POPUP -->
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-box">
+
+    <span class="close-btn" onclick="closeCheckout()">✕</span>
+
+    <h2>Checkout</h2>
+
+    <input type="text" placeholder="Full Name" id="name">
+    <input type="text" placeholder="Address" id="address">
+    <input type="text" placeholder="Phone Number" id="phone">
+
+    <select id="payment">
+      <option>Cash on Delivery</option>
+      <option>UPI</option>
+      <option>Card</option>
+    </select>
+    <div id="paymentFields"></div>
+    <div id="paymentLoader" style="display:none;"></div>
+    <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
+    
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+
+// ✅ LOAD CART FROM LOCALSTORAGE
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// ✅ SAVE CART
+function saveCart(){
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+}
+
+// ✅ RENDER CART
+function renderCart(){
+  const container = document.getElementById("cartItems");
+
+  if(cart.length === 0){
+    container.innerHTML = `
+  <div class="empty">
+    🛒 Cart is empty <br><br>
+    <a href="shop.html" style="
+      padding:10px 20px;
+      background:#2d5f3f;
+      color:white;
+      border-radius:20px;
+      text-decoration:none;
+    ">
+      Continue Shopping 🌿
+    </a>
+  </div>
+`;
+    updateTotals();
+    return;
+  }
+
+  container.innerHTML = cart.map((item,i)=>`
+    <div class="cart-item">
+      <img src="${item.image || 'https://via.placeholder.com/80'}" />
+      <div class="item-info">
+        <div class="item-title">${item.name}</div>
+        <div class="item-price">₹${item.price}</div>
+      </div>
+
+      <div class="quantity">
+        <button onclick="changeQty(${i},-1)">-</button>
+        <span>${item.qty}</span>
+        <button onclick="changeQty(${i},1)">+</button>
+      </div>
+
+      <button class="remove-btn" onclick="removeItem(${i})">✕</button>
+    </div>
+  `).join("");
+
+  updateTotals();
+}
+
+// ✅ CHANGE QTY
+function changeQty(index,change){
+  cart[index].qty += change;
+
+  if(cart[index].qty <= 0){
+    cart.splice(index,1);
+  }
+
+  saveCart();
+  renderCart();
+}
+
+// ✅ REMOVE ITEM
+function removeItem(index){
+  cart.splice(index,1);
+  saveCart();
+  renderCart();
+}
+
+// ✅ TOTAL CALCULATION
+function updateTotals(){
+  let subtotal = cart.reduce((sum,item)=>sum + item.price*item.qty,0);
+
+  let shipping = subtotal >= 999 ? 0 : 50;
+  let finalTotal = subtotal - discount + shipping;
+
+  document.getElementById("subtotal").innerText = "₹" + subtotal;
+
+  // ✅ update shipping UI
+  document.getElementById("shippingCharge").innerText =
+    shipping === 0 ? "FREE 🎉" : "₹50";
+
+  document.getElementById("total").innerText = "₹" + Math.max(finalTotal, 0);
+}
+
+// ✅ NAVBAR COUNT
+function updateCartCount(){
+  let count = cart.reduce((sum,item)=>sum + item.qty,0);
+  document.getElementById("navCartCount").innerText = count;
+}
+
+// ✅ ADD TO CART FUNCTION (USE IN SHOP PAGE)
+function addToCart(productOrName, price){
+
+  let product;
+
+  // ✅ HANDLE BOTH CASES
+  if(typeof productOrName === "object"){
+    product = productOrName;
+  } else {
+    product = {
+      id: Date.now(),
+      name: productOrName,
+      price: price
+    };
+  }
+
+  const existing = cart.find(item => item.name === product.name);
+
+  if(existing){
+    existing.qty++;
+  } else {
+    cart.push({...product, qty:1});
+  }
+
+  saveCart();
+}
+
+function openCheckout(){
+
+  if(cart.length === 0){
+    showToast("🛒 Cart is empty!");
+    return;
+  }
+
+  // 🔐 CHECK LOGIN
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if(isLoggedIn !== "true"){
+    showToast("🔐 Please login to continue");
+
+    // 👉 SAVE INTENT (IMPORTANT)
+    localStorage.setItem("redirectAfterLogin", "cart");
+
+    setTimeout(()=>{
+      window.location.href = "login.html";
+    },1500);
+
+    return;
+  }
+
+  // ✅ IF LOGGED IN → OPEN CHECKOUT
+  document.getElementById("checkoutModal").classList.add("active");
+}
+
+function closeCheckout(){
+  document.getElementById("checkoutModal").classList.remove("active");
+}
+
+function placeOrder(){
+
+  const name = document.getElementById('name').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const payment = document.getElementById('payment').value;
+
+  const loader = document.getElementById("paymentLoader");
+  const button = document.querySelector(".checkout-box .checkout-btn");
+
+  // 🔴 VALIDATION
+  if(!name || !address || !phone){
+    showToast("⚠️ Fill all details");
+    return;
+  }
+
+  if(payment === "UPI"){
+    const upi = document.getElementById('upiInput')?.value.trim();
+    if(!upi){
+      showToast("⚠️ Enter UPI ID");
+      return;
+    }
+  }
+
+  if(payment === "Card"){
+    const card = document.getElementById('cardNumber')?.value.trim();
+    if(!card){
+      showToast("⚠️ Enter Card Details");
+      return;
+    }
+  }
+
+  // 🔒 PREVENT MULTIPLE CLICKS
+  button.disabled = true;
+  button.innerText = "Processing...";
+
+  // 🔄 SHOW LOADER
+  if(loader){
+    loader.innerHTML = '<div class="loader"></div>';
+    loader.style.display = "block";
+  }
+
+  // 💥 HANDLE PAYMENT TYPES
+  if(payment === "Cash on Delivery"){
+
+    showToast("📦 Order placed with Cash on Delivery!");
+
+    setTimeout(()=>{
+      completeOrder(name, address, phone, loader, button);
+    }, 1000);
+
+  } else {
+
+    showToast("⏳ Processing payment...");
+
+    setTimeout(() => {
+
+      showToast("💳 Payment Successful!");
+
+      setTimeout(() => {
+        completeOrder(name, address, phone, loader, button);
+      }, 2000);
+
+    }, 3000);
+  }
+}
+
+document.getElementById("payment").addEventListener("change", function(){
+  const value = this.value;
+  const container = document.getElementById("paymentFields");
+
+  if(value === "UPI"){
+    container.innerHTML = `
+      <input type="text" id="upiInput" placeholder="Enter UPI ID">
+    `;
+  }
+  else if(value === "Card"){
+    container.innerHTML = `
+      <input type="text" id="cardNumber" placeholder="Card Number">
+      <input type="text" placeholder="Expiry Date">
+      <input type="text" placeholder="CVV">
+    `;
+  }
+  else{
+    container.innerHTML = "";
+  }
+});
+
+function completeOrder(name, address, phone, loader, button){
+
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+  orders.push({
+    id: Date.now(),
+    items: JSON.parse(JSON.stringify(cart)),
+    total: cart.reduce((s,i)=>s+i.price*i.qty,0),
+
+    discount: discount || 0,
+    coupon: appliedCoupon || null,
+
+    name: name,
+    phone: phone,
+    address: address,
+
+    status: "Packed",
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("orders", JSON.stringify(orders));
+  localStorage.removeItem("cart");
+
+  showToast("✅ Order Placed Successfully!");
+
+  setTimeout(()=>{
+
+    if(loader){
+      loader.style.display = "none";
+    }
+
+    button.disabled = false;
+    button.innerText = "Place Order";
+
+    closeCheckout();
+    location.reload();
+
+  },1500);
+}
+
+function showToast(msg){
+  const toast = document.getElementById("toast");
+  toast.innerText = msg;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2500);
+}
+
+window.addEventListener("load", () => {
+  const redirect = localStorage.getItem("redirectAfterLogin");
+
+  if(localStorage.getItem("isLoggedIn") === "true" && redirect === "cart"){
+    localStorage.removeItem("redirectAfterLogin");
+
+    setTimeout(()=>{
+      openCheckout();
+    },500);
+  }
+});
+
+let discount = 0;
+let appliedCoupon = null;
+
+function applyCoupon(){
+  const code = document.getElementById("couponInput").value.trim().toUpperCase();
+  const msg = document.getElementById("couponMsg");
+
+  let subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+
+  if(code === "GREEN20"){
+    if(subtotal >= 1499){
+      discount = subtotal * 0.2;
+      appliedCoupon = code;
+      msg.innerText = "🎉 Coupon applied! 20% OFF";
+      msg.style.color = "green";
+    } else {
+      msg.innerText = "⚠️ Minimum ₹1499 required";
+      msg.style.color = "red";
+      discount = 0;
+    }
+  } else {
+    msg.innerText = "❌ Invalid coupon";
+    msg.style.color = "red";
+    discount = 0;
+  }
+
+  updateTotals();
+}
+ function goHome() {
+    window.location.href = "index.html";
+  }
+// INIT
+renderCart();
+updateCartCount();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions - GreenVibe</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 40px;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+h1, h2 {
+  color: #2d5f3f;
+}
+
+p {
+  margin-bottom: 15px;
+}
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #2d5f3f;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #4a8c5e;
+  transform: translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+<button class="back-btn" onclick="goBack()">← Back</button>
+<div class="container">
+<h1>🌿 Terms & Conditions</h1>
+<p>Last Updated: 2025</p>
+
+<h2>1. Acceptance of Terms</h2>
+<p>By using GreenVibe, you agree to these terms and conditions.</p>
+
+<h2>2. Products & Pricing</h2>
+<p>All prices are subject to change without notice. We strive to provide accurate product details.</p>
+
+<h2>3. Orders</h2>
+<p>Orders are confirmed only after successful payment. We reserve the right to cancel any order.</p>
+
+<h2>4. Shipping</h2>
+<p>Delivery timelines may vary based on location. Delays may occur due to unforeseen circumstances.</p>
+
+<h2>5. Returns & Refunds</h2>
+<p>Returns are accepted within 7 days of delivery if the product is damaged or incorrect.</p>
+
+<h2>6. User Responsibilities</h2>
+<p>Users must provide accurate information while placing orders.</p>
+
+<h2>7. Limitation of Liability</h2>
+<p>GreenVibe is not liable for any indirect or incidental damages.</p>
+
+<h2>8. Changes to Terms</h2>
+<p>We may update these terms anytime. Continued use means acceptance of changes.</p>
+
+<h2>9. Contact</h2>
+<p>For queries: support@greenvibe.com</p>
+
+</div>
+<script>
+function goBack(){
+  if(document.referrer){
+    window.history.back();
+  } else {
+    window.location.href = "index.html";
+  }
+}
+</script>
+</body>
+</html>
