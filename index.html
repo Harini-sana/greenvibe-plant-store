@@ -587,7 +587,7 @@
             .nav-menu {
                 position: fixed;
                 left: -100%;
-                top: 80px;
+                top: 70px;
                 flex-direction: column;
                 background: var(--white);
                 width: 100%;
@@ -624,22 +624,74 @@
         }
 
         @media (max-width: 576px) {
-            .hero-text h1 {
-                font-size: 32px;
-            }
 
-            .section-title {
-                font-size: 32px;
-            }
+  .hero {
+    height: auto;
+    padding: 40px 0;
+  }
 
-            .nav-container {
-                padding: 15px 20px;
-            }
-        }
+  .hero-content {
+    padding: 0 15px;
+    gap: 30px;
+  }
+
+  .hero-text h1 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .hero-text p {
+    font-size: 15px;
+  }
+
+  .hero-image img {
+    border-radius: 15px;
+  }
+
+}
+
 .nav-menu a.active {
     color: var(--primary-green);
 }
 
+@media (max-width: 768px) {
+
+  .features,
+  .categories,
+  .newsletter,
+  .footer {
+    padding: 40px 20px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+}
+@media (max-width: 576px) {
+
+  .category-card {
+    height: 200px;
+  }
+
+  .category-overlay h3 {
+    font-size: 18px;
+  }
+
+  .category-overlay p {
+    font-size: 12px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+}
 .nav-menu a.active::after {
     content: '';
     position: absolute;
@@ -931,6 +983,7 @@
                 <span class="logo-icon">🌿</span>
                 GreenVibe
             </a>
+            <button class="mobile-toggle" id="mobileToggle">☰</button>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="shop.html">Shop</a></li>
@@ -1003,36 +1056,49 @@
 
     <!-- Categories Section -->
     <section class="categories" id="categories">
-        <div class="features-container">
-            <h2 class="section-title">Explore Our Categories</h2>
-            <div class="categories-grid">
+    <div class="features-container">
+        <h2 class="section-title">Explore Our Categories</h2>
+        <div class="categories-grid">
+
+            <a href="shop.html?category=indoor" style="text-decoration:none;">
                 <div class="category-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%2366bb6a%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2280%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🌿%3C/text%3E%3C/svg%3E') center/cover;">
                     <div class="category-overlay">
                         <h3>Indoor Plants</h3>
                         <p>Perfect for home & office spaces</p>
                     </div>
                 </div>
+            </a>
+
+            <a href="shop.html?category=outdoor" style="text-decoration:none;">
                 <div class="category-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%238bc34a%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2280%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🌳%3C/text%3E%3C/svg%3E') center/cover;">
                     <div class="category-overlay">
                         <h3>Outdoor Plants</h3>
                         <p>Beautify your garden & balcony</p>
                     </div>
                 </div>
+            </a>
+
+            <a href="shop.html?category=succulent" style="text-decoration:none;">
                 <div class="category-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%23aed581%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2280%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🌵%3C/text%3E%3C/svg%3E') center/cover;">
                     <div class="category-overlay">
                         <h3>Succulents</h3>
                         <p>Low maintenance desert beauties</p>
                     </div>
                 </div>
-                <div class="category-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%23ff6b9d%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2280%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🌺%3C/text%3E%3C/svg%3E') center/cover;">
-                    <div class="category-overlay">
-                        <h3>Flowering Plants</h3>
-                        <p>Add colors to your life</p>
-                    </div>
-                </div>
-            </div>
+            </a>
+
+            <a href="shop.html?category=flowering" style="text-decoration:none;">
+    <div class="category-card" style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%23ff6b9d%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2280%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🌺%3C/text%3E%3C/svg%3E') center/cover;">
+        <div class="category-overlay">
+            <h3>Flowering Plants</h3>
+            <p>Add colors to your life</p>
         </div>
-    </section>
+    </div>
+</a>
+
+        </div>
+    </div>
+</section>
 
     <!-- Newsletter Section -->
     <section class="newsletter">
@@ -1159,28 +1225,19 @@ Track Order
       <div class="premium-card">
         <h3>Monstera Deliciosa</h3>
         <p>₹599</p>
-        <button onclick="goToProduct('Monstera Deliciosa')">View Product</button>
-        <button onclick="addPremiumToCart('Monstera Deliciosa', 599)">
-🛒 Add to Cart
-</button>
+        
       </div>
 
       <div class="premium-card">
         <h3>Fiddle Leaf Fig</h3>
         <p>₹799</p>
-        <button onclick="goToProduct('Fiddle Leaf Fig')">View Product</button>
-        <button onclick="addPremiumToCart('Fiddle Leaf Fig', 799)">
-🛒 Add to Cart
-</button>
+        
       </div>
 
       <div class="premium-card">
         <h3>Areca Palm</h3>
         <p>₹499</p>
-        <button onclick="goToProduct('Areca Palm')">View Product</button>
-        <button onclick="addPremiumToCart('Areca Palm', 499)">
-🛒 Add to Cart
-</button>
+        
       </div>
 
     </div>

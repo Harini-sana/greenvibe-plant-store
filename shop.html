@@ -1965,6 +1965,14 @@ function addToCartById(id) {
             }
         });
         updateCartCount();
+
+const params = new URLSearchParams(window.location.search);
+const category = params.get("category");
+
+if(category){
+  currentFilter = category;
+  filterProducts();
+}
     </script>
 </body>
 </html>
